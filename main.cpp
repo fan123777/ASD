@@ -2,5 +2,6 @@
 
 void main()
 {
-	nsAnalysis::main();
+	// nsAnalysis::main();
+	nsAnalysisPrinciples::main();
 }
