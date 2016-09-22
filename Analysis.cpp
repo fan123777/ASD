@@ -155,11 +155,3 @@ namespace nsAnalysis
 		delete[] sz;
 	}
 }
-
-namespace nsAnalysisPrinciples
-{
-	void main()
-	{
-
-	}
-}

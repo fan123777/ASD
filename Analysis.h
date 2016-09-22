@@ -49,9 +49,3 @@ namespace nsAnalysis
 
 	// 1.5 Обзор тем 
 }
-
-// Принципы анализа алгоритмов
-namespace nsAnalysisPrinciples
-{
-	void main();
-}

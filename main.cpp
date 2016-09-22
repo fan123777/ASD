@@ -1,4 +1,5 @@
 #include "Analysis.h"
+#include "AnalysisPrinciples.h"
 
 void main()
 {

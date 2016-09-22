@@ -77,10 +77,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="AnalysisPrinciples.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Analysis.h" />
+    <ClInclude Include="AnalysisPrinciples.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
