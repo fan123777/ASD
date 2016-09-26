@@ -77,12 +77,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="DataStructures.cpp" />
+    <ClCompile Include="ElementaryDataStructures.cpp" />
+    <ClCompile Include="Introduction.cpp" />
     <ClCompile Include="AnalysisPrinciples.cpp" />
+    <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Analysis.h" />
+    <ClInclude Include="DataStructures.h" />
+    <ClInclude Include="ElementaryDataStructures.h" />
+    <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />
+    <ClInclude Include="List1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

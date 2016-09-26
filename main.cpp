@@ -1,8 +1,8 @@
 #include "Analysis.h"
-#include "AnalysisPrinciples.h"
+#include "DataStructures.h"
 
 void main()
 {
 	// nsAnalysis::main();
-	nsAnalysisPrinciples::main();
+	nsDataStructures::main();
 }

@@ -14,29 +14,62 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="1 Analysis">
+      <UniqueIdentifier>{cfd1a209-326c-45a4-b60b-901019c294a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1 Analysis\1 Introduction">
       <UniqueIdentifier>{c5b1a0d5-1e92-4309-ad57-4b312463dd91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2 Analysis Principles">
+    <Filter Include="1 Analysis\2 Analysis Principles">
       <UniqueIdentifier>{4d9b5302-0a35-4207-a8c0-424ff96e86a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2 Data Structures">
+      <UniqueIdentifier>{c336da9a-15a9-4055-a1b1-2040cb6e608e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2 Data Structures\3  Elementary Data Structures">
+      <UniqueIdentifier>{c01652d5-3e92-404b-be44-c7f69b29260f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnalysisPrinciples.cpp">
+      <Filter>1 Analysis\2 Analysis Principles</Filter>
+    </ClCompile>
+    <ClCompile Include="Introduction.cpp">
+      <Filter>1 Analysis\1 Introduction</Filter>
+    </ClCompile>
     <ClCompile Include="Analysis.cpp">
       <Filter>1 Analysis</Filter>
     </ClCompile>
-    <ClCompile Include="AnalysisPrinciples.cpp">
-      <Filter>2 Analysis Principles</Filter>
+    <ClCompile Include="DataStructures.cpp">
+      <Filter>2 Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementaryDataStructures.cpp">
+      <Filter>2 Data Structures\3  Elementary Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="List1.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnalysisPrinciples.h">
+      <Filter>1 Analysis\2 Analysis Principles</Filter>
+    </ClInclude>
+    <ClInclude Include="Introduction.h">
+      <Filter>1 Analysis\1 Introduction</Filter>
+    </ClInclude>
     <ClInclude Include="Analysis.h">
       <Filter>1 Analysis</Filter>
     </ClInclude>
-    <ClInclude Include="AnalysisPrinciples.h">
-      <Filter>2 Analysis Principles</Filter>
+    <ClInclude Include="DataStructures.h">
+      <Filter>2 Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementaryDataStructures.h">
+      <Filter>2 Data Structures\3  Elementary Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="List1.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
