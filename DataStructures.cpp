@@ -5,6 +5,6 @@ namespace nsDataStructures
 {
 	void main()
 	{
-		nsElementaryDataStructures::main();
+		// nsElementaryDataStructures::main();
 	}
 }

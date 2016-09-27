@@ -10,16 +10,18 @@ namespace nsDataStructures
 	{
 		void main()
 		{
-			// program1();
-			// program2();
-			// program5();
-			// program7();
-			// program8();
-			// testList();
-			// program9();
-			// program11();
-			// program13();
-			program15();
+			 program1();
+			 program2();
+			 program5();
+			 program7();
+			 program8();
+			 testList();
+			 program9();
+			 program11();
+			 program13();
+			 program15();
+			 program17();
+			 program19();
 		}
 
 		void program1()
@@ -246,6 +248,105 @@ namespace nsDataStructures
 			}
 
 			cout << endl;
+		}
+
+		template<typename T>
+		T **malloc2d(int r, int c)
+		{
+			T **t = new T*[r];
+			for (int i = 0; i < r; i++)
+				t[i] = new T[c];
+			return t;
+		}
+
+		void program17()
+		{
+			const int Nmax = 1000;
+			const int Mmax = 10000;
+			char* a[Nmax];
+			int N;
+			char buf[Mmax];
+			int M = 0;
+			for (N = 0; N < Nmax; N++)
+			{
+				a[N] = &buf[M];
+				if (!(cin >> a[N])) break;
+				M += strlen(a[N]) + 1;
+			}
+			qsort(a, N, sizeof(char*), compare);
+			for (int i = 0; i < N; i++)
+				cout << a[i] << endl;
+		}
+
+		int compare(const void *i, const void *j)
+		{
+			return strcmp(*(char **)i, *(char **)j);
+		}
+
+		void program18()
+		{
+			const int V = 3;
+			int i, j, adj[V][V];
+			for (i = 0; i < V; i++)
+				for (j = 0; j < V; j++)
+					adj[i][j] = 0;
+			for (i = 0; i < V; i++)
+				adj[i][i] = 1;
+			while (cin >> i >> j)
+			{
+				adj[i][j] = 1;
+				adj[j][i] = 1;
+			}
+		}
+
+		void program19()
+		{
+			const int V = 3;
+			int i, j; Glink adj[V];
+
+			for (i = 0; i < V; i++)
+				adj[i] = 0;
+
+			while (cin >> i >> j)
+			{
+				adj[j] = new GNode(i, adj[j]);
+				adj[i] = new GNode(j, adj[i]);
+			}
+		}
+
+		static link<point> **grid;
+		static int G, cnt = 0; static float d;
+
+		void program20()
+		{
+			int i, N = 100;
+			d = 0.5;
+			G = 1 / d;
+			// grid = malloc2d<point>(G + 2, G + 2);
+			for (i = 0; i < G + 2; i++)
+			for (int j = 0; j < G + 2; j++)
+				grid[i][j] = 0;
+			for (i = 0; i < N; i++)
+				gridinsert(randFloat(), randFloat());
+			cout << cnt << " pairs within " << d << endl;
+		}
+
+		void gridinsert(float x, float y)
+		{
+			int X = x*G + 1;
+			int Y = y*G + 1;
+
+			point p;
+			p.x = x;
+			p.у = y;
+			link<point> s, t = new node<point>(p, grid[X][Y]);
+
+			for (int i = X - 1; i <= X + 1; i++)
+				for (int j = Y - 1; j <= Y + 1; j++)
+					for (s = grid[i][j]; s != 0; s = s->next)
+						if (distance(s->item, t->item) < d)
+							cnt++;
+			grid[X][Y] = t;
 		}
 	}
 }
