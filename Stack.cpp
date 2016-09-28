@@ -5,7 +5,7 @@ namespace nsDataStructures
 	namespace nsAbstractDataTypes
 	{
 		template <class Item>
-		Stack<Item>::Stack(int)
+		Stack<Item>::Stack(int number)
 		{
 
 		}

@@ -61,7 +61,10 @@
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClCompile>
     <ClCompile Include="Stack.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UnionFind.cpp">
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,7 +93,10 @@
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClInclude>
     <ClInclude Include="Stack.h">
-      <Filter>Header Files</Filter>
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionFind.h">
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
