@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractDataTypes.cpp" />
     <ClCompile Include="Analysis.cpp" />
     <ClCompile Include="DataStructures.cpp" />
     <ClCompile Include="ElementaryDataStructures.cpp" />
@@ -83,14 +84,19 @@
     <ClCompile Include="AnalysisPrinciples.cpp" />
     <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractDataTypes.h" />
     <ClInclude Include="Analysis.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />
     <ClInclude Include="List1.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
