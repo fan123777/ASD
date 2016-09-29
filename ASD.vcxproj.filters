@@ -66,6 +66,9 @@
     <ClCompile Include="UnionFind.cpp">
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -96,6 +99,9 @@
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClInclude>
     <ClInclude Include="UnionFind.h">
+      <Filter>2 Data Structures\4 Abstract Data Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClInclude>
   </ItemGroup>

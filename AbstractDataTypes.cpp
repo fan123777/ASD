@@ -1,7 +1,9 @@
 ﻿#include "AbstractDataTypes.h"
-#include "Point.h"
 #include <iostream>
+#include "Point.h"
 #include "Stack.h"
+#include "UnionFind.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -13,7 +15,11 @@ namespace nsDataStructures
 		{
 			// program2();
 			// program5(); - has some bug, debug it
-			program6();
+			// program6();
+
+			const int N = 7;
+			int a[N][2] = { { 1, 2 }, { 2, 3 }, { 1, 3 }, { 1, 5 }, { 4, 6 }, { 1, 3 }, { 6, 4 } };
+			program10(N, a);
 		}
 
 		void program2()
@@ -73,6 +79,23 @@ namespace nsDataStructures
 					cout << a[i] << " ";
 			}
 			cout << endl;
+		}
+
+		void program10(const int N, int a[][2])
+		{
+			int p, q, j;
+			UnionFind info(N);
+
+			for (j = 0; j < N; j++)
+			{
+				p = a[j][0];
+				q = a[j][1];
+				if (!info.find(p, q))
+				{
+					info.unite(p, q);
+					cout << " " << p << " " << q << endl;
+				}
+			}
 		}
 	}
 }

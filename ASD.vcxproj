@@ -85,6 +85,7 @@
     <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="UnionFind.cpp" />
   </ItemGroup>
@@ -97,6 +98,7 @@
     <ClInclude Include="AnalysisPrinciples.h" />
     <ClInclude Include="List1.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="UnionFind.h" />
   </ItemGroup>
