@@ -31,6 +31,9 @@
     <Filter Include="2 Data Structures\4 Abstract Data Types">
       <UniqueIdentifier>{b0aec21d-06f4-4dea-93ef-11b96ec3f2ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2 Data Structures\5 Recursion And Trees">
+      <UniqueIdentifier>{d41d5179-f355-48e6-b67a-454f18709d17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,6 +78,9 @@
     <ClCompile Include="Polynom.cpp">
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClCompile>
+    <ClCompile Include="RecursionAndTrees.cpp">
+      <Filter>2 Data Structures\5 Recursion And Trees</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -115,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Polynom.h">
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
+    </ClInclude>
+    <ClInclude Include="RecursionAndTrees.h">
+      <Filter>2 Data Structures\5 Recursion And Trees</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

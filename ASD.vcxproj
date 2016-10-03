@@ -88,6 +88,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="RecursionAndTrees.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="UnionFind.cpp" />
   </ItemGroup>
@@ -103,6 +104,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynom.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="RecursionAndTrees.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="UnionFind.h" />
   </ItemGroup>
