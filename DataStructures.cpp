@@ -7,6 +7,6 @@ namespace nsDataStructures
 	void main()
 	{
 		// nsElementaryDataStructures::main();
-		nsAbstractDataTypes::main();
+		// nsAbstractDataTypes::main();
 	}
 }

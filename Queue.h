@@ -29,7 +29,30 @@ namespace nsDataStructures
 					head = 0;
 				}
 
-				~Queue();
+				Queue(const Queue& rhs)
+				{
+					head = 0;
+					*this = rhs;
+				}
+
+				Queue& operator=(const Queue& rhs)
+				{
+					if (this == &rhs)
+						return *this;
+					deletelist();
+					link t = rhs.head;
+					while (t != 0)
+					{
+						put(t->item);
+						t = t->next;
+					}
+					return *this;
+				}
+
+				~Queue()
+				{
+					deletelist();
+				}
 
 				int empty() const
 				{
@@ -56,6 +79,15 @@ namespace nsDataStructures
 				}
 
 			private:
+				void deletelist()
+				{
+					for (link t = head; t != 0; head = t)
+					{
+						t = head->next;
+						delete head;
+					}
+				}
+
 				struct node
 				{
 					Item item;
@@ -109,6 +141,27 @@ namespace nsDataStructures
 					head = head % N;
 					return q[head++];
 				}
+			};
+		}
+
+		namespace nsFirstClassQueue
+		{
+			// Программа 4.21 Интерфейс АТД первого класса "Очередь"
+			// Программа 4.22 Реализация очереди первого класса на базе связного списка
+
+			template <class Item>
+			class Queue
+			{
+			private:
+				// Implementation-dependent code 
+			public:
+				Queue(int);
+				Queue(const Queue&);
+				Queue& operator=(const Queue&);
+				~Queue();
+				int empty() const;
+				void put(Item);
+				Item get();
 			};
 		}
 	}

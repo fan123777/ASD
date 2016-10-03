@@ -106,5 +106,52 @@ namespace nsDataStructures
 				}
 			};
 		}
+
+		// Программа 4.16 Стек индексных элементов, в котором запрещены повторяющиеся элементы
+		namespace nsUniqueStack
+		{
+			template <class Item>
+			class Stack
+			{
+			public:
+				Stack(int maxN)
+				{
+					N = 0;
+					s = new Item[maxN];
+					t = new Item[maxN];
+					for (int i = 0; i < maxN; i++)
+						t[i] = 0;
+				}
+
+				~Stack()
+				{
+					delete[] s;
+					delete[] t;
+				}
+
+				bool empty() const
+				{
+					return N == 0;
+				}
+
+				void push(Item item)
+				{
+					if (t[item] == 1)
+						return;
+					s[N++] = item;
+					t[item] = 1;
+				}
+
+				Item pop()
+				{
+					t[s[--N]] = 0;
+					return s[N];
+				}
+
+			private:
+				Item *s, *t;
+				int N;
+			};
+		}
 	}
 }

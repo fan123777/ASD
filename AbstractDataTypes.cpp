@@ -4,6 +4,8 @@
 #include "Stack.h"
 #include "UnionFind.h"
 #include "Queue.h"
+#include "Complex.h"
+#include "Polynom.h"
 
 using namespace std;
 
@@ -13,13 +15,15 @@ namespace nsDataStructures
 	{
 		void main()
 		{
-			// program2();
-			// program5(); - has some bug, debug it
-			// program6();
-
+			program2();
+			program5(); // has some bug, debug it
+			program6();
 			const int N = 7;
 			int a[N][2] = { { 1, 2 }, { 2, 3 }, { 1, 3 }, { 1, 5 }, { 4, 6 }, { 1, 3 }, { 6, 4 } };
 			program10(N, a);
+			program17();
+			program20();
+			program23(); // some error
 		}
 
 		void program2()
@@ -96,6 +100,60 @@ namespace nsDataStructures
 					cout << " " << p << " " << q << endl;
 				}
 			}
+		}
+
+		void program17()
+		{
+			int N = 2;
+			cout << N << " complex roots of unity" << endl;
+			for (int k = 0; k < N; k++)
+			{
+				float theta = 2.0 * 3.14159 * k / N;
+				Complex t(cos(theta), sin(theta)), x = t;
+				cout << k << ": " << t << " ";
+				for (int j = 0; j < N - 1; j++)
+					x *= t;
+				cout << x << endl;
+			}
+		}
+
+		void program20()
+		{
+			const int M = 4;
+
+			int N = 10;
+			nsListQueue::Queue<int> queues[M];
+
+			for (int i = 0; i < N; i++, cout << endl)
+			{
+				int in = rand() % M, out = rand() % M;
+				queues[in].put(i);
+				cout << i << " in ";
+				if (!queues[out].empty())
+					cout << queues[out].get() << " out";
+				cout << endl;
+				for (int k = 0; k < M; k++, cout << endl)
+				{
+					nsListQueue::Queue<int> q = queues[k];
+					cout << k << ": ";
+					while (!q.empty())
+						cout << q.get() << " ";
+				}
+			}
+		}
+
+		void program23()
+		{
+			int N = 5;
+			float p = 1.1;
+			cout << "Binomial coefficients" << endl;
+			Polynom<int> x(1, 1), one(1, 0), t = x + one, y = t;
+			for (int i = 0; i < N; i++)
+			{
+				y = y*t;
+				// cout << y << endl;
+			}
+			cout << y.eval(p) << endl;
 		}
 	}
 }
