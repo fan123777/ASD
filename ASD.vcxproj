@@ -81,6 +81,7 @@
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DataStructures.cpp" />
     <ClCompile Include="ElementaryDataStructures.cpp" />
+    <ClCompile Include="ElementarySortingMethods.cpp" />
     <ClCompile Include="Introduction.cpp" />
     <ClCompile Include="AnalysisPrinciples.cpp" />
     <ClCompile Include="List1.cpp" />
@@ -89,6 +90,7 @@
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="RecursionAndTrees.cpp" />
+    <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UnionFind.cpp" />
@@ -99,6 +101,7 @@
     <ClInclude Include="Complex.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ElementaryDataStructures.h" />
+    <ClInclude Include="ElementarySortingMethods.h" />
     <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />
     <ClInclude Include="List1.h" />
@@ -106,6 +109,7 @@
     <ClInclude Include="Polynom.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="RecursionAndTrees.h" />
+    <ClInclude Include="Sorting.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UnionFind.h" />

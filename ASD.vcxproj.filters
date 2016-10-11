@@ -34,6 +34,12 @@
     <Filter Include="2 Data Structures\5 Recursion And Trees">
       <UniqueIdentifier>{d41d5179-f355-48e6-b67a-454f18709d17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3 Sorting">
+      <UniqueIdentifier>{0ce32528-06cd-468d-ae37-6d8a32d24b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3 Sorting\6 Elementary sorting methods">
+      <UniqueIdentifier>{9779c3aa-dedf-4832-88f9-408a35bd68ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,6 +90,12 @@
     <ClCompile Include="Tree.cpp">
       <Filter>2 Data Structures\5 Recursion And Trees</Filter>
     </ClCompile>
+    <ClCompile Include="Sorting.cpp">
+      <Filter>3 Sorting</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementarySortingMethods.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -130,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>2 Data Structures\5 Recursion And Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="Sorting.h">
+      <Filter>3 Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementarySortingMethods.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

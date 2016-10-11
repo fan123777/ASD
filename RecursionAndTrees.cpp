@@ -18,6 +18,11 @@ namespace nsDataStructures
 			res = knap(17, a, N);
 			res = knap1(17, a, N);
 			testTree();
+			int array[10] = { 1, 6, 9, 8, 3, 2, 1, 5, 7, 4 };
+			Tree<int>* tree = max1(array, 0, 9);
+			res = height(tree);
+			show(tree, res);
+
 		}
 
 		int factorial1(int N)
@@ -157,16 +162,17 @@ namespace nsDataStructures
 
 		void testTree()
 		{
-			Tree<int>* tree = new Tree<int>();
-			tree->item = 5;
-			tree->l = new Tree<int>();
-			tree->l->item = 10;
-			tree->r = new Tree<int>();
-			tree->r->item = 2;
+			Tree<int>* tree = new Tree<int>(5);
+			tree->l = new Tree<int>(10);
+			tree->r = new Tree<int>(2);
 
 			tree->traverse(print);
 			traverse(tree, print);
 			traverse1(tree, print);
+
+			int res = count(tree);
+			res = height(tree);
+			show(tree, res);
 
 			delete tree->l;
 			delete tree->r;

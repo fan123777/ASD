@@ -9,6 +9,6 @@ namespace nsDataStructures
 	{
 		// nsElementaryDataStructures::main();
 		// nsAbstractDataTypes::main();
-		nsRecursionAndTrees::main();
+		// nsRecursionAndTrees::main();
 	}
 }
