@@ -1,4 +1,5 @@
 ﻿#include "RecursionAndTrees.h"
+#include "Tree.h"
 
 namespace nsDataStructures
 {
@@ -16,6 +17,7 @@ namespace nsDataStructures
 			MyItem a[] = { { 3, 4 }, { 4, 5 }, { 7, 10 }, { 8, 11 }, { 9, 13 } };
 			res = knap(17, a, N);
 			res = knap1(17, a, N);
+			testTree();
 		}
 
 		int factorial1(int N)
@@ -151,6 +153,24 @@ namespace nsDataStructures
 				}
 			maxKnown[M] = max;
 			return max;
+		}
+
+		void testTree()
+		{
+			Tree<int>* tree = new Tree<int>();
+			tree->item = 5;
+			tree->l = new Tree<int>();
+			tree->l->item = 10;
+			tree->r = new Tree<int>();
+			tree->r->item = 2;
+
+			tree->traverse(print);
+			traverse(tree, print);
+			traverse1(tree, print);
+
+			delete tree->l;
+			delete tree->r;
+			delete tree;
 		}
 	}
 }
