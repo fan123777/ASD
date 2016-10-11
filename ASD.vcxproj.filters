@@ -81,6 +81,9 @@
     <ClCompile Include="RecursionAndTrees.cpp">
       <Filter>2 Data Structures\5 Recursion And Trees</Filter>
     </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>2 Data Structures\5 Recursion And Trees</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -123,6 +126,9 @@
       <Filter>2 Data Structures\4 Abstract Data Types</Filter>
     </ClInclude>
     <ClInclude Include="RecursionAndTrees.h">
+      <Filter>2 Data Structures\5 Recursion And Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
       <Filter>2 Data Structures\5 Recursion And Trees</Filter>
     </ClInclude>
   </ItemGroup>

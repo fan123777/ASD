@@ -11,6 +11,11 @@ namespace nsDataStructures
 			res = factorial2(10);
 			res = puzzle(3);
 			res = gcd(314159, 271828);
+			res = F1(10);
+			int N = 5;
+			MyItem a[] = { { 3, 4 }, { 4, 5 }, { 7, 10 }, { 8, 11 }, { 9, 13 } };
+			res = knap(17, a, N);
+			res = knap1(17, a, N);
 		}
 
 		int factorial1(int N)
@@ -106,6 +111,46 @@ namespace nsDataStructures
 			if (i == 1)
 				return 1;
 			return F(i - 1) + F(i - 2);
+		}
+
+		int F1(int i)
+		{
+			static int knownF[100];
+			if (knownF[i] != 0)
+				return knownF[i];
+			int t = i;
+			if (i < 0)
+				return 0;
+			if (i > 1)
+				t = F1(i - 1) + F1(i - 2);
+			return knownF[i] = t;
+		}
+
+		int knap(int cap, MyItem a[], int N)
+		{
+			int i, space, max, t;
+			for (i = 0, max = 0; i < N; i++)
+				if ((space = cap - a[i].size) >= 0)
+					if ((t = knap(space, a, N) + a[i].val) > max)
+						max = t;
+			return max;
+		}
+
+		int knap1(int M, MyItem a[], int N)
+		{
+			static int maxKnown[100];
+			int i, space, max, maxi = 0, t;
+			if (maxKnown[M] != 0)
+				return maxKnown[M];
+
+			for (i = 0, max = 0; i < N; i++)
+			if ((space = M - a[i].size) >= 0)
+				if ((t = knap1(space, a, N) + a[i].val) >max)
+				{
+					max = t; maxi = i;
+				}
+			maxKnown[M] = max;
+			return max;
 		}
 	}
 }
