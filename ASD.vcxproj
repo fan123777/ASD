@@ -78,12 +78,14 @@
   <ItemGroup>
     <ClCompile Include="AbstractDataTypes.cpp" />
     <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DataStructures.cpp" />
     <ClCompile Include="ElementaryDataStructures.cpp" />
     <ClCompile Include="ElementarySortingMethods.cpp" />
     <ClCompile Include="Introduction.cpp" />
     <ClCompile Include="AnalysisPrinciples.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
@@ -98,12 +100,14 @@
   <ItemGroup>
     <ClInclude Include="AbstractDataTypes.h" />
     <ClInclude Include="Analysis.h" />
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="ElementarySortingMethods.h" />
     <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="List1.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynom.h" />

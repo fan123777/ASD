@@ -1,5 +1,6 @@
 #include "ElementarySortingMethods.h"
 #include <iostream>
+#include "Array.h"
 
 using namespace std;
 
@@ -20,12 +21,31 @@ namespace nsSorting
 				while (cin >> a[N])
 					N++;
 			}
-			sort(a, 0, N - 1);
+			// sort(a, 0, N - 1);
+			// selection(a, 0, N - 1);
+			// insertion(a, 0, N - 1);
+			// bubble(a, 0, N - 1);
+			shellsort(a, 0, N - 1);
 			for (i = 0; i < N; i++)
 				cout << a[i] << " ";
 			cout << endl;
 
 			delete[] a;
+
+			program6();
+		}
+
+		void program6()
+		{
+			/*int N = 10, sw = 1;
+			Item *a = new Item[N];
+			if (sw)
+				nsArray::rand(a, N);
+			else
+				nsArray::scan(a, N);
+			nsArray::sort(a, 0, N - 1);
+			nsArray::show(a, 0, N - 1);
+			delete[] a;*/
 		}
 	}
 }

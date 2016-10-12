@@ -94,7 +94,13 @@
       <Filter>3 Sorting</Filter>
     </ClCompile>
     <ClCompile Include="ElementarySortingMethods.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Array.cpp">
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +153,13 @@
       <Filter>3 Sorting</Filter>
     </ClInclude>
     <ClInclude Include="ElementarySortingMethods.h">
-      <Filter>Header Files</Filter>
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>3 Sorting\6 Elementary sorting methods</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
