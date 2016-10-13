@@ -40,6 +40,9 @@
     <Filter Include="3 Sorting\6 Elementary sorting methods">
       <UniqueIdentifier>{9779c3aa-dedf-4832-88f9-408a35bd68ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3 Sorting\7 Quick Sort">
+      <UniqueIdentifier>{407631d1-21a6-44b1-834e-4235788efb5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,6 +108,9 @@
     <ClCompile Include="SortList.cpp">
       <Filter>3 Sorting\6 Elementary sorting methods</Filter>
     </ClCompile>
+    <ClCompile Include="QuickSort.cpp">
+      <Filter>3 Sorting\7 Quick Sort</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -166,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="SortList.h">
       <Filter>3 Sorting\6 Elementary sorting methods</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSort.h">
+      <Filter>3 Sorting\7 Quick Sort</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
