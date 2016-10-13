@@ -93,6 +93,7 @@
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="RecursionAndTrees.cpp" />
     <ClCompile Include="Sorting.cpp" />
+    <ClCompile Include="SortList.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UnionFind.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Queue.h" />
     <ClInclude Include="RecursionAndTrees.h" />
     <ClInclude Include="Sorting.h" />
+    <ClInclude Include="SortList.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UnionFind.h" />
