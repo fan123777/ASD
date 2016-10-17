@@ -27,7 +27,7 @@ namespace nsSorting
 		{
 			for (int i = 1 + 1; i <= r; i++)
 				for (int j = i; j > l; j--)
-					compexch(a[j-1], a[j]);
+					compexch(a[j - 1], a[j]);
 		}
 
 		// Программа 6.2.Сортировка выбором
@@ -40,7 +40,7 @@ namespace nsSorting
 				for (int j = i + 1; j <= r; j++)
 					if (a[j] < a[min])
 						min = j;
-				exch(a[i], a[min]);
+					exch(a[i], a[min]);
 			}
 		}
 

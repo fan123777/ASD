@@ -43,6 +43,9 @@
     <Filter Include="3 Sorting\7 Quick Sort">
       <UniqueIdentifier>{407631d1-21a6-44b1-834e-4235788efb5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{99b7b331-e3e8-4239-88de-31eec9d7d2a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -111,6 +114,9 @@
     <ClCompile Include="QuickSort.cpp">
       <Filter>3 Sorting\7 Quick Sort</Filter>
     </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -175,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="QuickSort.h">
       <Filter>3 Sorting\7 Quick Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
