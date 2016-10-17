@@ -46,6 +46,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{99b7b331-e3e8-4239-88de-31eec9d7d2a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3 Sorting\8 Merge and MergeSort">
+      <UniqueIdentifier>{7e758ff7-fd14-4d32-9a80-75b2361dce38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +120,9 @@
     <ClCompile Include="Common.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="MergeAndMergeSort.cpp">
+      <Filter>3 Sorting\8 Merge and MergeSort</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -184,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MergeAndMergeSort.h">
+      <Filter>3 Sorting\8 Merge and MergeSort</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

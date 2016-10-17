@@ -89,6 +89,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MergeAndMergeSort.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Queue.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="AnalysisPrinciples.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="List1.h" />
+    <ClInclude Include="MergeAndMergeSort.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynom.h" />
     <ClInclude Include="Queue.h" />
