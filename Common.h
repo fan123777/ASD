@@ -33,4 +33,105 @@ namespace nsCommon
 			a[j] = v;
 		}
 	}
+
+	template<typename Item>
+	struct node
+	{
+		node(Item x, node*t = nullptr)
+		{
+			item = x;
+			next = t;
+		}
+
+		Item item;
+		node *next;
+	};
+
+	template<typename T>
+	using link = node<T>*;
+
+	template <class Item>
+	class Queue
+	{
+	public:
+		Queue()
+		{
+			head = 0;
+		}
+
+		Queue(const Queue& rhs)
+		{
+			head = 0;
+			*this = rhs;
+		}
+
+		Queue& operator=(const Queue& rhs)
+		{
+			if (this == &rhs)
+				return *this;
+			deletelist();
+			link t = rhs.head;
+			while (t != 0)
+			{
+				put(t->item);
+				t = t->next;
+			}
+			return *this;
+		}
+
+		~Queue()
+		{
+			deletelist();
+		}
+
+		int empty() const
+		{
+			return head == 0;
+		}
+
+		void put(Item x)
+		{
+			link t = tail;
+			tail = new node(x);
+			if (head == 0)
+				head = tail;
+			else
+				t->next = tail;
+		}
+
+		Item get()
+		{
+			Item v = head->item;
+			link t = head->next;
+			delete head;
+			head = t;
+			return v;
+		}
+
+	private:
+		void deletelist()
+		{
+			for (link t = head; t != 0; head = t)
+			{
+				t = head->next;
+				delete head;
+			}
+		}
+
+		struct node
+		{
+			Item item;
+			node* next;
+			node(Item x)
+			{
+				item = x;
+				next = 0;
+			}
+		};
+
+		typedef node *link;
+
+		link head;
+		link tail;
+	};
 }

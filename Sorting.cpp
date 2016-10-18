@@ -2,6 +2,7 @@
 #include "ElementarySortingMethods.h"
 #include "QuickSort.h"
 #include "MergeAndMergeSort.h"
+#include "PriorityQueueAndHeapSort.h"
 
 namespace nsSorting
 {
@@ -9,6 +10,7 @@ namespace nsSorting
 	{
 		// nsElementarySortingMethods::main();
 		// nsQuickSort::main();
-		nsMergeAndMergeSort::main();
+		// nsMergeAndMergeSort::main();
+		nsPriorityQueueAndHeapSort::main();
 	}
 }
