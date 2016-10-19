@@ -92,6 +92,8 @@
     <ClCompile Include="MergeAndMergeSort.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Polynom.cpp" />
+    <ClCompile Include="PriorityQueue.cpp" />
+    <ClCompile Include="PriorityQueueAndHeapSort.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="QuickSort.cpp" />
     <ClCompile Include="RecursionAndTrees.cpp" />
@@ -117,6 +119,8 @@
     <ClInclude Include="MergeAndMergeSort.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynom.h" />
+    <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="PriorityQueueAndHeapSort.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="QuickSort.h" />
     <ClInclude Include="RecursionAndTrees.h" />

@@ -49,6 +49,9 @@
     <Filter Include="3 Sorting\8 Merge and MergeSort">
       <UniqueIdentifier>{7e758ff7-fd14-4d32-9a80-75b2361dce38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3 Sorting\9 Priority queue and HeapSort">
+      <UniqueIdentifier>{bce41bdb-f7c0-4d64-8500-63fc70d1e166}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -123,6 +126,12 @@
     <ClCompile Include="MergeAndMergeSort.cpp">
       <Filter>3 Sorting\8 Merge and MergeSort</Filter>
     </ClCompile>
+    <ClCompile Include="PriorityQueueAndHeapSort.cpp">
+      <Filter>3 Sorting\9 Priority queue and HeapSort</Filter>
+    </ClCompile>
+    <ClCompile Include="PriorityQueue.cpp">
+      <Filter>3 Sorting\9 Priority queue and HeapSort</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -193,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="MergeAndMergeSort.h">
       <Filter>3 Sorting\8 Merge and MergeSort</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueueAndHeapSort.h">
+      <Filter>3 Sorting\9 Priority queue and HeapSort</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue.h">
+      <Filter>3 Sorting\9 Priority queue and HeapSort</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
