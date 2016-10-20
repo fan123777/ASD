@@ -61,7 +61,10 @@ namespace nsSorting
 				Item *pq;
 				int N;
 			};
+		}
 
+		namespace nsSortingTreePQ
+		{
 			// Программа 9.3.Восходящая установка структуры сортирующего дерева
 			template <class Item>
 			void fixUp(Item a[], int k)
@@ -88,6 +91,45 @@ namespace nsSorting
 					k = j;
 				}
 			}
+
+			// Программа 9.5.Очередь по приоритетам на базе сортирующего дерева
+			template <class Item>
+			class PQ
+			{
+			public:
+				PQ(int maxN)
+				{
+					pq = new Item[maxN + 1];
+					N = 0;
+				}
+
+				~PQ()
+				{
+					delete[] pq;
+				}
+
+				int empty() const
+				{
+					return N == 0;
+				}
+
+				void insert(Item item)
+				{
+					pq[++N] = item;
+					fixUp(pq, N);
+				}
+
+				Item getmax()
+				{
+					nsCommon::exch(pq[1], pq[N]);
+					fixDown(pq, 1, N - l);
+					return pq[N--];
+				}
+
+			private:
+				Item *pq;
+				int N;
+			};
 		}
 	}
 }
