@@ -131,5 +131,25 @@ namespace nsSorting
 				int N;
 			};
 		}
+
+		namespace nsFullPQ
+		{
+			// Программа 9.8.Полный АТД очереди по приоритетам
+			template <class Item>
+			class PQ
+			{
+			public:
+				//Определение дескриптора в зависимости от реализации 
+				PQ(int);
+				int empty() const;
+				handle insert(Item);
+				Item getmax();
+				void change(handle, Item);
+				void remove(handle);
+				void join(PQ<Item>&);
+			private:
+				//Программный код, зависящий от реализации 
+			};
+		}
 	}
 }
