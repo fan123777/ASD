@@ -11,13 +11,10 @@ namespace nsSorting
 
 		inline int digit(long A, int B)
 		{
-			{ 
-				return (A >> bitsbyte*(bytesword - B - 1) & (R - 1));
-			}
-
+			return (A >> bitsbyte*(bytesword - B - 1) & (R - 1));
 		}
 
-		inline int digit(char* A, int B)
+		inline int digit1(char* A, int B)
 		{
 			return A[B];
 		}
