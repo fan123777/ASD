@@ -319,36 +319,121 @@ namespace nsSorting
 
 		namespace nsBinominalPQ
 		{
-			typedef int Item;
-
-			struct node
+			template <class Item>
+			class PQ
 			{
-				Item item;
-				node * l, *r;
-
-				node(Item v)
+			private:
+				struct node
 				{
-					item = v;
-					l = 0;
-					r = 0;
+					Item item;
+					node * l, *r;
+
+					node(Item v)
+					{
+						item = v;
+						l = 0;
+						r = 0;
+					}
+				};
+				typedef node *link;
+				link* bq;
+				typedef link handle;
+				const int maxBQsize = 100;
+
+			public:
+				// Программа 9.13.Объединение двух сортирующих деревьев степени 2 одинаковых размеров
+				static link pair(link p, link q)
+				{
+					if (p->item < q->item)
+					{
+						p->r = q->l; q->l = p; return q;
+					}
+					else
+					{
+						q->r = p->l; p->l = q; return q;
+					}
+				}
+
+				// Программа 9.14.Вставка в биномиальную очередь
+				handle insert(Item v)
+				{
+					link t = new node(v), c = t;
+					
+					for (int i = 0; i < maxBQsize; i++)
+					{
+						if (c == 0)
+							break;
+						if (bq[i] == 0)
+						{
+							bq[i] = c; break;
+						}
+						c = pair(c, bq[i]);
+						bq[i] = 0;
+					}
+					return t;
+				}
+
+				// Программа 9.15.Удаление наибольшего элемента из биномиальной очереди
+				Item getmax()
+				{
+					int i, max;
+					Item v = 0;
+					link* temp = new link[maxBQsize];
+					for (i = 0, max = -1; i < maxBQsize; i++)
+						if (bq[i] != 0)
+							if ((max == -1) || (v < bq[i]->item))
+							{
+								max = i; v = bq[max]->item;
+							}
+					link x = bq[max]->l;
+					for (i = max; i < maxBQsize; i++)
+						temp[i] = 0;
+					for (i = max; i > 0; i--)
+					{
+						temp[i - 1] = x;
+						x = x->r;
+						temp[i - 1]->r = 0;
+					}
+					delete bq[max];
+					bq[max] = 0;
+						BQjoin(bq, temp);
+					delete temp;
+					return v;
+				}
+
+				// Программа 9.16.Объединение(слияние) двух биномиальных очередей
+				static inline int test(int C, int B, int A)
+				{
+					return 4 * C + 2 * B + 1 * A
+				}
+				static void BQjoin(link *a, link *b)
+				{
+					link с = 0;
+					for (int i = 0; i < maxBQsize; i++)
+						switch (test(c != 0, b[i] != 0, a[i] != 0))
+					{
+						case 2:
+							a[i] = b[i];
+							break;
+						case 3:
+							c = pair(a[i], b[i]);
+							a[i] = 0;
+							break;
+						case 4:
+							a[i] = c;
+							c = 0;
+							break;
+						case 5:
+							c = pair(c, a[i]);
+							a[i] = 0;
+							break;
+						case 6:
+						case 7:
+							c = pair(c, b[i]);
+							break;
+					}
 				}
 			};
-
-			typedef node *link;
-			// link* bq;
-
-			// Программа 9.13.Объединение двух сортирующих деревьев степени 2 одинаковых размеров
-			static link pair(link p, link q)
-			{
-				if (p->item < q->item)
-				{
-					p->r = q->l; q->l = p; return q;
-				}
-				else
-				{
-					q->r = p->l; p->l = q; return q;
-				}
-			}
 		}
 	}
 }
