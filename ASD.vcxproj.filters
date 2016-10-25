@@ -55,6 +55,9 @@
     <Filter Include="3 Sorting\10 Bitwise Sort">
       <UniqueIdentifier>{a0f6b9fb-c456-491d-b188-1137d26c7232}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3 Sorting\11 Special Purpose Sorting Methods">
+      <UniqueIdentifier>{2d085061-b148-4608-8726-7b02a7cc0b86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,6 +141,9 @@
     <ClCompile Include="BitwiseSort.cpp">
       <Filter>3 Sorting\10 Bitwise Sort</Filter>
     </ClCompile>
+    <ClCompile Include="SpecialPurposeSortingMethods.cpp">
+      <Filter>3 Sorting\11 Special Purpose Sorting Methods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -217,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="BitwiseSort.h">
       <Filter>3 Sorting\10 Bitwise Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialPurposeSortingMethods.h">
+      <Filter>3 Sorting\11 Special Purpose Sorting Methods</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

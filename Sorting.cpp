@@ -4,6 +4,7 @@
 #include "MergeAndMergeSort.h"
 #include "PriorityQueueAndHeapSort.h"
 #include "BitwiseSort.h"
+#include "SpecialPurposeSortingMethods.h"
 
 namespace nsSorting
 {
@@ -13,6 +14,7 @@ namespace nsSorting
 		// nsQuickSort::main();
 		// nsMergeAndMergeSort::main();
 		// nsPriorityQueueAndHeapSort::main();
-		nsBitwiseSort::main();
+		// nsBitwiseSort::main();
+		nsSpecialPurposeSortingMethods::main();
 	}
 }

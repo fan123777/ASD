@@ -100,6 +100,7 @@
     <ClCompile Include="RecursionAndTrees.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="SortList.cpp" />
+    <ClCompile Include="SpecialPurposeSortingMethods.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UnionFind.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="RecursionAndTrees.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="SortList.h" />
+    <ClInclude Include="SpecialPurposeSortingMethods.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UnionFind.h" />
