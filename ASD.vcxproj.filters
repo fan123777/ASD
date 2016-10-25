@@ -58,6 +58,12 @@
     <Filter Include="3 Sorting\11 Special Purpose Sorting Methods">
       <UniqueIdentifier>{2d085061-b148-4608-8726-7b02a7cc0b86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4 Search">
+      <UniqueIdentifier>{44c0b03a-aa35-45f5-8238-79792ca8de37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4 Search\12 Character Tables and Binary Search Trees">
+      <UniqueIdentifier>{32bd18df-59a4-4717-b142-e7021a0a4d88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,6 +150,18 @@
     <ClCompile Include="SpecialPurposeSortingMethods.cpp">
       <Filter>3 Sorting\11 Special Purpose Sorting Methods</Filter>
     </ClCompile>
+    <ClCompile Include="Search.cpp">
+      <Filter>4 Search</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterTablesAndBinarySearchTrees.cpp">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchItem.cpp">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="ST.cpp">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -226,6 +244,18 @@
     </ClInclude>
     <ClInclude Include="SpecialPurposeSortingMethods.h">
       <Filter>3 Sorting\11 Special Purpose Sorting Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Search.h">
+      <Filter>4 Search</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterTablesAndBinarySearchTrees.h">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchItem.h">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="ST.h">
+      <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

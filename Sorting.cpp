@@ -10,11 +10,11 @@ namespace nsSorting
 {
 	void main()
 	{
-		// nsElementarySortingMethods::main();
-		// nsQuickSort::main();
-		// nsMergeAndMergeSort::main();
-		// nsPriorityQueueAndHeapSort::main();
-		// nsBitwiseSort::main();
+		nsElementarySortingMethods::main();
+		nsQuickSort::main();
+		nsMergeAndMergeSort::main();
+		nsPriorityQueueAndHeapSort::main();
+		nsBitwiseSort::main();
 		nsSpecialPurposeSortingMethods::main();
 	}
 }

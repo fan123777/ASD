@@ -80,6 +80,7 @@
     <ClCompile Include="Analysis.cpp" />
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="BitwiseSort.cpp" />
+    <ClCompile Include="CharacterTablesAndBinarySearchTrees.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DataStructures.cpp" />
@@ -98,9 +99,12 @@
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="QuickSort.cpp" />
     <ClCompile Include="RecursionAndTrees.cpp" />
+    <ClCompile Include="Search.cpp" />
+    <ClCompile Include="SearchItem.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="SortList.cpp" />
     <ClCompile Include="SpecialPurposeSortingMethods.cpp" />
+    <ClCompile Include="ST.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UnionFind.cpp" />
@@ -110,6 +114,7 @@
     <ClInclude Include="Analysis.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="BitwiseSort.h" />
+    <ClInclude Include="CharacterTablesAndBinarySearchTrees.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="DataStructures.h" />
@@ -127,9 +132,12 @@
     <ClInclude Include="Queue.h" />
     <ClInclude Include="QuickSort.h" />
     <ClInclude Include="RecursionAndTrees.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="SearchItem.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="SortList.h" />
     <ClInclude Include="SpecialPurposeSortingMethods.h" />
+    <ClInclude Include="ST.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UnionFind.h" />
