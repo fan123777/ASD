@@ -124,6 +124,12 @@ namespace nsSearch
 					st[i] = x;
 				}
 
+				// Программа 12.7 Бинарный поиск(в таблице символов, основанной на массиве)
+				Item binarySearch(Key v)
+				{
+					return searchR(0, N - 1, v);
+				}
+
 				Item search(Key v)
 				{
 					int i = 0;
@@ -148,6 +154,22 @@ namespace nsSearch
 				}
 
 			private:
+
+				Item searchR(int l, int r, Key v)
+				{
+					if (l > r)
+						return nullItem;
+					int m = (l + r) / 2;
+					if (v == st[m].key())
+						return st[m];
+					if (l == r)
+						return nullItem;
+					if (v < st[m].key())
+						return searchR(l, m - 1, v);
+					else
+						return searchR(m + l, r, v);
+				}
+
 				Item nullItem, *st;
 				int N;
 			};
@@ -205,6 +227,72 @@ namespace nsSearch
 				{
 					head = new node(x, head);
 					N++;
+				}
+			};
+		}
+
+		namespace nsBSTST
+		{
+			// Программа 12.8 Таблица символов на базе дерева бинарного поиска
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					Item item; node *l, *r;
+					node(Item x)
+					{
+						item = x;
+						l = 0;
+						r = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+				Item nullItem;
+
+				Item searchR(link h, Key v)
+				{
+					if (h == 0)
+						return nullItem;
+					Key t = h->item.key();
+					if (v == t)
+						return h->item;
+					if (v < t)
+						return searchR(h->l, v);
+					else
+						return searchR(h->r, v);
+				}
+
+				void insertR(link& h, Item x)
+				{
+					if (h == 0)
+					{
+						h = new node(x);
+						return;
+					}
+					if (x.key() < h->item.key())
+						insertR(h->l, x);
+					else
+						insertR(h->r, x);
+				}
+
+			public:
+				ST(int maxN)
+				{
+					head = 0;
+				}
+
+				Item search(Key v)
+				{
+					return searchR(head, v);
+				}
+
+				void insert(Item x)
+				{
+					insertR(head, x);
 				}
 			};
 		}
