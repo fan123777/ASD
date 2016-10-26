@@ -6,7 +6,6 @@
 static int maxKey = 1000;
 typedef int Key;
 
-
 namespace nsSearch
 {
 	namespace nsCharacterTablesAndBinarySearchTrees
@@ -32,7 +31,7 @@ namespace nsSearch
 
 				int null()
 				{
-					return keyval = maxKey;
+					return keyval == maxKey;
 				}
 
 				void rand()
@@ -52,11 +51,7 @@ namespace nsSearch
 				}
 			};
 
-			std::ostream& operator<<(std::ostream& os, Item& x)
-			{
-				x.show(os);
-				return os;
-			}
+			std::ostream& operator<<(std::ostream& os, Item& x);
 		}
 	}
 }

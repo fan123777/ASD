@@ -6,7 +6,11 @@ namespace nsSearch
 	{
 		namespace nsSearchItem
 		{
-
+			std::ostream& operator<<(std::ostream& os, Item& x)
+			{
+				x.show(os);
+				return os;
+			}
 		}
 	}
 }
