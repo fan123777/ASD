@@ -252,6 +252,7 @@ namespace nsSearch
 				typedef node *link;
 				link head;
 				Item nullItem;
+				int N;
 
 				Item searchR(link h, Key v)
 				{
@@ -271,6 +272,7 @@ namespace nsSearch
 					if (h == 0)
 					{
 						h = new node(x);
+						N++;
 						return;
 					}
 					if (x.key() < h->item.key())
@@ -279,10 +281,25 @@ namespace nsSearch
 						insertR(h->r, x);
 				}
 
+				void showR(link h, std::ostream& os)
+				{
+					if (h == 0)
+						return;
+					showR(h->l, os);
+					h->item.show(os);
+					showR(h->r, os);
+				}
+
 			public:
 				ST(int maxN)
 				{
 					head = 0;
+					N = 0;
+				}
+
+				int count()
+				{
+					return N;
 				}
 
 				Item search(Key v)
@@ -293,6 +310,30 @@ namespace nsSearch
 				void insert(Item x)
 				{
 					insertR(head, x);
+				}
+
+				// Программа 12.10 Вставка в BST - дерево(нерекурсивная)
+				void insert1(Item x)
+				{
+					Key v = х.key();
+					if (head == 0)
+					{
+						head = new node(x);
+						return;
+					}
+					link p = head;
+					for (link q = p; q != 0; p = q ? q : p)
+						q = (v < q->item.key()) ? q->l : q->r;
+					if (v < p->item.key())
+						р->l = new node(x);
+					else
+						p->r = new node(x);
+				}
+
+				// Программа 12.9 Сортировка с помощью BST-дерева
+				void show(std::ostream& os)
+				{
+					showR(head, os);
 				}
 			};
 		}
