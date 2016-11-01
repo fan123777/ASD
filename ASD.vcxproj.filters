@@ -64,6 +64,9 @@
     <Filter Include="4 Search\12 Character Tables and Binary Search Trees">
       <UniqueIdentifier>{32bd18df-59a4-4717-b142-e7021a0a4d88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4 Search\13 Balanced Trees">
+      <UniqueIdentifier>{bf065e8a-3945-48b4-8afe-c0e86ceae7a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +165,9 @@
     <ClCompile Include="ST.cpp">
       <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
     </ClCompile>
+    <ClCompile Include="BalancedTrees.cpp">
+      <Filter>4 Search\13 Balanced Trees</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -256,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="ST.h">
       <Filter>4 Search\12 Character Tables and Binary Search Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="BalancedTrees.h">
+      <Filter>4 Search\13 Balanced Trees</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
