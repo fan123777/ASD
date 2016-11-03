@@ -67,6 +67,9 @@
     <Filter Include="4 Search\13 Balanced Trees">
       <UniqueIdentifier>{bf065e8a-3945-48b4-8afe-c0e86ceae7a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4 Search\14 Hashing">
+      <UniqueIdentifier>{0d136af2-185f-40e5-9bef-7067d8d6f139}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +171,9 @@
     <ClCompile Include="BalancedTrees.cpp">
       <Filter>4 Search\13 Balanced Trees</Filter>
     </ClCompile>
+    <ClCompile Include="Hashing.cpp">
+      <Filter>4 Search\14 Hashing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="BalancedTrees.h">
       <Filter>4 Search\13 Balanced Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashing.h">
+      <Filter>4 Search\14 Hashing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
