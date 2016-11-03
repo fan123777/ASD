@@ -206,6 +206,22 @@ namespace nsSearch
 					return searchR(t->next, v);
 				}
 
+				Item searchR1(link t, Key v, int k)
+				{
+					if (t == 0)
+						return nullItem;
+					if (v == t->item.key())
+						return t->item;
+					link x = t->next[k];
+					if ((x == 0) || (v < x->item.key()))
+					{
+						if (k == 0)
+							return nullItem;
+						return searchR1(t, v, k - 1);
+					}
+					return searchR1(x, v, k);
+				}
+
 			public:
 				ST(int maxN)
 				{
@@ -228,6 +244,13 @@ namespace nsSearch
 					head = new node(x, head);
 					N++;
 				}
+
+				// Программа 13.7 Поиск в списках пропусков
+				Item search1(Key v)
+				{
+					return searchR(head, v, lgN);
+				}
+
 			};
 		}
 
@@ -253,6 +276,7 @@ namespace nsSearch
 				link head;
 				Item nullItem;
 				int N;
+				int red;
 
 				Item searchR(link h, Key v)
 				{
@@ -363,11 +387,11 @@ namespace nsSearch
 				void insertR1(link& h, Item x)
 				{
 					if (h == 0)
-					{ 
+					{
 						h = new node(x);
 						return;
 					}
-					if (rand() < RAND_MAX/(h->N + 1))
+					if (rand() < RAND_MAX / (h->N + 1))
 					{
 						insertT(h, x);
 						return;
@@ -391,8 +415,8 @@ namespace nsSearch
 						a->r = joinLR1(a->r, b);
 						return a;
 					}
-					else 
-					{ 
+					else
+					{
 						b->l = joinLR1(a, b->l);
 						return b;
 					}
@@ -446,6 +470,53 @@ namespace nsSearch
 							rotR(hr);
 						}
 						rotL(h);
+					}
+				}
+
+				int Red(link x)
+				{
+					if (x == 0)
+						return 0;
+					return x->red;
+				}
+
+				void RBinsert(link& h, Item x, int sw)
+				{
+					if (h == 0)
+					{
+						h = new node(x);
+						return;
+					}
+
+					if (Red(h->l) && Red(h->r))
+					{
+						h->red = 1;
+						h->l->red = 0;
+						h->r->red = 0;
+					}
+					if (x.key() < h->item.key())
+					{
+						RBinsert(h->l, x, 0);
+						if (Red(h) && Red(h->l) && sw)
+							rotR(h);
+						if (Red(h->l) && Red(h->l->l))
+						{
+							rotR(h);
+							h->red = 0;
+							h->r->red = 1;
+						}
+					}
+					else
+					{
+						RBinsert(h->r, x, 1);
+						if (Red(h) && Red(h->r) && !sw)
+							rotL(h);
+						if (Red(h->r) && Red(h->r->r))
+						{
+							rotL(h);
+							h->red = 0;
+							h->l->red = 1;
+						}
 					}
 				}
 
@@ -580,6 +651,110 @@ namespace nsSearch
 				void insert4(Item item)
 				{
 					splay(head, item);
+				}
+
+				// Программа 13.6 Вставка в RB-деревья бинарного поиска 
+				void insert5(Item x)
+				{
+					RBinsert(head, x, 0);
+					head->red = 0;
+				}
+			};
+		}
+
+		namespace nsPassList
+		{
+			// Программа 13.8 Структуры данных и конструктор списка пропусков
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					Item item;
+					node **next;
+					int sz;
+					node(Item x, int k)
+					{
+						item = x;
+						sz = k;
+						next = new node*[k];
+						for (int i = 0; i < k; i++)
+							next[i] = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+				Item nullItem;
+				int lgN;
+				static const int lgNmax = 10;
+
+				int randX()
+				{
+					int i, j, t = rand();
+					for (i = 1, j = 2; i < lgNmax; i++, j += j)
+					if (t > RAND_MAX / j)
+						break;
+					if (i > lgN)
+						lgN = i;
+					return i;
+				}
+
+				void insertR(link t, link x, int k)
+				{
+					Key v = x->item.key();
+					link tk = t->next[k];
+					if ((tk == 0) || (v < tk->item.key()))
+					{
+						if (k < x->sz)
+						{
+							x->next[k] = tk;
+							t->next[k] = x;
+						}
+						if (k = 0)
+							return;
+						insertR(t, x, k - 1); return;
+					}
+					insertR(tk, x, k);
+				}
+
+				void removeR(link t, Key v, int k)
+				{
+					link x = t->next[k];
+					if (!(x->item.key() < v))
+					{
+						if (v == x->item.key())
+						{
+							t->next[k] = x->next[k];
+						}
+						if (k == 0)
+						{ 
+							delete x;
+							return;
+						}
+						removeR(t, v, k - 1); return;
+					}
+					removeR(t->next[k], v, k);
+				}
+
+			public:
+				ST(int)
+				{
+					head = new node(nullItem, lgNmax);
+					lgN = 0;
+				}
+
+				// Программа 13.9 Вставка в список пропусков
+				void insert(Item v)
+				{
+					insertR(head, new node(v, randX()), lgN);
+				}
+
+				// Программа 13.10 Удаление в списках пропусков
+				void remove(Item x)
+				{
+					removeR(head, x.key(), lgN);
 				}
 			};
 		}
