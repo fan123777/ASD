@@ -248,7 +248,7 @@ namespace nsSearch
 				// Программа 13.7 Поиск в списках пропусков
 				Item search1(Key v)
 				{
-					return searchR(head, v, lgN);
+					return searchR1(head, v, lgN);
 				}
 
 			};
@@ -689,6 +689,8 @@ namespace nsSearch
 				Item nullItem;
 				int lgN;
 				static const int lgNmax = 10;
+				link* heads;
+				int N, M;
 
 				int randX()
 				{
@@ -738,11 +740,30 @@ namespace nsSearch
 					removeR(t->next[k], v, k);
 				}
 
-			public:
-				ST(int)
+				Item searchR1(link t, Key v)
 				{
+					if (t == 0)
+						return nullItem;
+					if (t->item.key() == v)
+						return t->item;
+					return searchR(t->next, v);
+				}
+
+			public:
+				ST(int maxN)
+				{
+					N = 0; M = maxN / 5;
+					heads = new link[M];
+					for (int i = 0; i < M; i++)
+						heads[i] = 0;
+
 					head = new node(nullItem, lgNmax);
 					lgN = 0;
+				}
+
+				~ST()
+				{
+					delete[] heads;
 				}
 
 				// Программа 13.9 Вставка в список пропусков
@@ -755,6 +776,19 @@ namespace nsSearch
 				void remove(Item x)
 				{
 					removeR(head, x.key(), lgN);
+				}
+
+				// Программа 14.3 Хеширование с помощью раздельного связывания
+				Item search(Key v)
+				{
+					return searchR1(heads[hash(v, M)], v);
+				}
+
+				void insert1(Item item)
+				{
+					int i = hash(item, key(), M);
+					heads[i] = new node(item, heads[i]);
+					N++;
 				}
 			};
 		}
