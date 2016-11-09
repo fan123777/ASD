@@ -70,6 +70,9 @@
     <Filter Include="4 Search\14 Hashing">
       <UniqueIdentifier>{0d136af2-185f-40e5-9bef-7067d8d6f139}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4 Search\15 Bitwise Search">
+      <UniqueIdentifier>{3ed17fbb-48cb-45e0-8796-80f7cc287e63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -174,6 +177,9 @@
     <ClCompile Include="Hashing.cpp">
       <Filter>4 Search\14 Hashing</Filter>
     </ClCompile>
+    <ClCompile Include="BitwiseSearch.cpp">
+      <Filter>4 Search\15 Bitwise Search</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -274,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="Hashing.h">
       <Filter>4 Search\14 Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="BitwiseSearch.h">
+      <Filter>4 Search\15 Bitwise Search</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

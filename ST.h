@@ -819,6 +819,15 @@ namespace nsSearch
 				int N, M;
 				Item nullItem;
 
+				void expand()
+				{
+					Item *t = st;
+					init(M + M);
+					for (int i = 0; i < M / 2; i++)
+					if (!t[i].null()) insert2(t[i]);
+					delete[] t;
+				}
+
 			public:
 				ST(int maxN)
 				{
@@ -899,6 +908,22 @@ namespace nsSearch
 					else
 						i = (i + k) % M;
 					return nullItem;
+				}
+
+				// Программа 14.7 Динамическая вставка в хеш-таблицу (для линейного зондирования)
+				// ST(int maxN)
+				// {
+				// 	init(4);
+				// }
+
+				void insert2(Item item)
+				{
+					int i = hash(item.key(), M);
+					while (!st[i].null())
+						i = (i + 1) % M;
+					st[i] = item;
+					if (N++ >= M / 2)
+						expand();
 				}
 			};
 		}

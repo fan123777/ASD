@@ -80,6 +80,7 @@
     <ClCompile Include="Analysis.cpp" />
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="BalancedTrees.cpp" />
+    <ClCompile Include="BitwiseSearch.cpp" />
     <ClCompile Include="BitwiseSort.cpp" />
     <ClCompile Include="CharacterTablesAndBinarySearchTrees.cpp" />
     <ClCompile Include="Common.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Analysis.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="BalancedTrees.h" />
+    <ClInclude Include="BitwiseSearch.h" />
     <ClInclude Include="BitwiseSort.h" />
     <ClInclude Include="CharacterTablesAndBinarySearchTrees.h" />
     <ClInclude Include="Common.h" />
