@@ -927,5 +927,296 @@ namespace nsSearch
 				}
 			};
 		}
+
+		namespace nsDST
+		{
+			// Программа 15.1 Бинарное DST - дерево
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					Item item; node *l, *r;
+					node(Item x)
+					{
+						item = x;
+						l = 0;
+						r = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+				Item nullItem;
+				int N;
+				int red;
+
+				Item searchR(link h, Key v)
+				{
+					if (h == 0)
+						return nullItem;
+					Key t = h->item.key();
+					if (v == t)
+						return h->item;
+					if (v < t)
+						return searchR(h->l, v);
+					else
+						return searchR(h->r, v);
+				}
+
+				void insertR(link& h, Item x)
+				{
+					if (h == 0)
+					{
+						h = new node(x);
+						N++;
+						return;
+					}
+					if (x.key() < h->item.key())
+						insertR(h->l, x);
+					else
+						insertR(h->r, x);
+				}
+
+				void showR(link h, std::ostream& os)
+				{
+					if (h == 0)
+						return;
+					showR(h->l, os);
+					h->item.show(os);
+					showR(h->r, os);
+				}
+
+				void insertT(link& h, Item x)
+				{
+					if (h == 0)
+					{
+						h = new node(x);
+						return;
+					}
+					if (x.key() < h->item.key())
+					{
+						insertT(h->l, x);
+						rotR(h);
+					}
+					else
+					{
+						insertT(h->r, x);
+						rotL(h);
+					}
+				}
+
+				Item selectR(link h, int k)
+				{
+					if (h == 0)
+						return nullItem;
+					int t = (h->l == 0) ? 0 : h->l->N;
+					if (t > k)
+						return selectR(h->l, k);
+					if (t < k)
+						return selectR(h->r, k - t - 1);
+					return h->item;
+				}
+
+				link joinLR(link a, link b)
+				{
+					if (b == 0)
+						return a;
+					partR(b, 0);
+					b->l = a;
+					return b;
+				}
+
+				void removeR(link& h, Key v)
+				{
+					if (h == 0)
+						return;
+					Key w = h->item.key();
+					if (v < w)
+						removeR(h->l, v);
+					if (w < v)
+						removeR(h->r, v);
+					if (v == w)
+					{
+						link t = h;
+						h = joinLR(h->l, h->r);
+						delete t;
+					}
+				}
+
+				link joinR(link a, link b)
+				{
+					if (b == 0)
+						return a;
+					if (а == 0)
+						return Ь;
+					insertT(b, a->item);
+					b->l = joinR(a->l, b->l);
+					b->г = joinR(a->r, b->r);
+					delete a;
+					return b;
+				}
+
+				void insertR1(link& h, Item x)
+				{
+					if (h == 0)
+					{
+						h = new node(x);
+						return;
+					}
+					if (rand() < RAND_MAX / (h->N + 1))
+					{
+						insertT(h, x);
+						return;
+					}
+					if (x.key() < h->item.key())
+						insertR1(h->l, x);
+					else
+						insertR1(h->r, x);
+					h->N++;
+				}
+
+			public:
+				ST(int maxN)
+				{
+					head = 0;
+					N = 0;
+				}
+
+				int count()
+				{
+					return N;
+				}
+
+				Item search(Key v)
+				{
+					return searchR(head, v);
+				}
+
+				void insert(Item x)
+				{
+					insertR(head, x);
+				}
+
+				// Программа 12.10 Вставка в BST - дерево(нерекурсивная)
+				void insert1(Item x)
+				{
+					Key v = х.key();
+					if (head == 0)
+					{
+						head = new node(x);
+						return;
+					}
+					link p = head;
+					for (link q = p; q != 0; p = q ? q : p)
+						q = (v < q->item.key()) ? q->l : q->r;
+					if (v < p->item.key())
+						р->l = new node(x);
+					else
+						p->r = new node(x);
+				}
+
+				// Программа 12.9 Сортировка с помощью BST-дерева
+				void show(std::ostream& os)
+				{
+					showR(head, os);
+				}
+
+				// Программа 12.12 Ротации в BST - деревьях
+				void rotR(link& h)
+				{
+					link x = h->l;
+					h->l = x->r;
+					x->r = h;
+					h = x;
+				}
+
+				void rotL(link& h)
+				{
+					link x = h->r;
+					h->r = x->l;
+					x->l = h;
+					h = x;
+				}
+
+				// Программа 12.13 Вставка в корень BST - дерева
+				void insert2(Item item)
+				{
+					insertT(head, item);
+				}
+
+				// Программа 12.14 Выбор с помощью BST - дерева
+				Item select(int k)
+				{
+					return selectR(head, k);
+				}
+
+				// Программа 12.16 Удаление узла с данным ключом из BST - дерева
+				void remove(Item x)
+				{
+					removeR(head, x.key());
+				}
+
+				// Программа 12.17 Объединение двух BST-деревьев
+				void join(ST<Item, Key>& b)
+				{
+					head = joinR(head, b.head);
+				}
+
+				// Программа 13.1 Балансировка BST - дерева
+				void balanceR(link& h)
+				{
+					if ((h == 0) || (h->N == 1)) return;
+					partR(h, h->N / 2);
+					balanceR(h->l);
+					balanceR(h->r);
+				}
+
+				// Программа 13.2 Вставка в рандомизованное BST - дерево
+				void insert3(Item x)
+				{
+					insertR1(head, x);
+				}
+
+				// Программа 13.3 Комбинация рандомизованных BST - деревьев
+				void join1(ST<Item, Key>& b)
+				{
+					int N = head->N;
+					if (rand() / (RAND_MAX / (N + b.head->N) + 1) < N)
+						head = joinR1(head, b.head);
+					else
+						head = joinR1(b.head, head);
+				}
+
+				// Программа 13.3 Комбинация рандомизованных BST - деревьев
+				link joinR1(link a, link b)
+				{
+					if (a == 0)
+						return b;
+					if (b == 0)
+						return a;
+					insertR1(b, a->item);
+					b->l = joinR1(a->l, b->l);
+					b->r = joinR1(a->r, b->r);
+					delete a;
+					fixN(b);
+					return b;
+				}
+
+				// Программа 13.5 Вставка с расширением в BST - деревья
+				void insert4(Item item)
+				{
+					splay(head, item);
+				}
+
+				// Программа 13.6 Вставка в RB-деревья бинарного поиска 
+				void insert5(Item x)
+				{
+					RBinsert(head, x, 0);
+					head->red = 0;
+				}
+			};
+		}
 	}
 }
