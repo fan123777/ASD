@@ -939,6 +939,7 @@ namespace nsSearch
 				{
 					Item item;
 					node * l, *r;
+
 					node(Item x)
 					{
 						item = x;
@@ -1036,6 +1037,174 @@ namespace nsSearch
 				{
 					insertR1(head, item, 0);
 				}
+			};
+		}
+
+		namespace nsPatricia
+		{
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					Item item;
+					node * l, *r;
+					int bit;
+
+					node(Item x)
+					{
+						item = x;
+						l = 0;
+						r = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+				Item nullItem;
+
+				Item searchR(link h, Key v, int d)
+				{
+					if (h->bit <= d)
+						return h->item;
+					if (digit(v, h->bit) == 0)
+						return searchR(h->l, v, h->bit);
+					else
+						return searchR(h->r, v, h->bit);
+				}
+
+				link insertR(link h, Item x, int d, link p)
+				{
+					Key v = x.key();
+					if ((h->bit >= d) || (h->bit <= p->bit))
+					{
+						link t = new node(x); t->bit = d;
+						t->l = (digit(v, t->bit) ? h : t);
+						t->r = (digit(v, t->bit) ? t : h);
+						return t;
+					}
+					if (digit(v, h->bit) == 0)
+						h->l = insertR(h->l, x, d, h);
+					else
+						h->r = insertR(h->r, x, d, h);
+					return h;
+				}
+
+				void showR(link h, std::ostream& os, int d)
+				{
+					if (h->bit <= d)
+					{
+						h->item.show(os);
+						return;
+					}
+					showR(h->l, os, h->bit);
+					showR(h->r, os, h->bit);
+				}
+
+			public:
+				// Программа 15.4 Поиск в patricia - дереве
+				Item search(Key v)
+				{
+					Item t = searchR(head, v, -1);
+					return (v == t.key()) ? t : nullItem;
+				}
+
+				// Программа 15.5 Вставка в patricia - дерево
+				ST(int maxN)
+				{
+					head = new node(nullItem);
+					head->l = head->r = head;
+				}
+
+				void insert(Item x)
+				{
+					Key v = x.key();
+					int i;
+					Key w = searchR(head->l, v, -1).key();
+					if (v == w)
+						return;
+					for (i = 0; digit(v, i) == digit(w, i); i++);
+						head->l = insertR(head->l, x, i, head);
+				}
+
+				// Программа 15.6 Сортировка в patricia - дереве
+				void show(std::ostream& os)
+				{
+					showR(head->l, os, -1);
+				}
+
+			};
+		}
+
+		namespace nsTrie
+		{
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					node **next;
+					node()
+					{
+						next = new node*[R];
+						for (int i = 0; i < R; i++)
+							next[i] = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+
+				Item searchR(link h, Key v, int d)
+				{
+					int i = digit(v, d);
+					if (h == 0)
+						return nullItem;
+					if (i — NULLdigit)
+					{
+						Item dummy(v);
+						return dummy;
+					}
+					return searchR(h->next[i], v, d + 1);
+				}
+
+				void insertR(link& h, Item x, int d)
+				{
+					int i = digit(x.key(), d);
+					if (h == 0)
+						h = new node;
+					if (i == NULLdigit)
+						return;
+					insertR(h->next[i], x, d + 1);
+				}
+
+			public:
+				ST(int maxN)
+				{
+					head = 0;
+				}
+
+				Item search(Key v)
+				{
+					return searchR(head, v, 0);
+				}
+
+				void insert(Item x)
+				{
+					insertR(head, x, 0);
+				}
+			};
+		}
+
+		namespace nsTST
+		{
+			// Программа 15.8 Поиск и вставка в TST - дерево существования
+			template <class Item, class Key>
+			class ST
+			{
+
 			};
 		}
 	}
