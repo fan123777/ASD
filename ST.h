@@ -1204,7 +1204,201 @@ namespace nsSearch
 			template <class Item, class Key>
 			class ST
 			{
+			private:
+				struct node
+				{
+					Item item;
+					int d;
+					node * l, *m, *r;
+					node(int k)
+					{
+						d = k;
+						l = 0;
+						m = 0;
+						r = 0;
+					}
+				};
 
+				typedef node *link;
+				link head;
+				Item nullItem;
+
+				Item searchR(link h, Key v, int d)
+				{
+					int i = digit(v, d);
+					if (h == 0) return nullItem;
+					if (i == NULLdigit)
+					{
+						Item dummy(v);
+						return dummy;
+					}
+					if (i < h->d)
+						return searchR(h->l, v, d);
+					if (i == h->d)
+						return searchR(h->m, v, d + 1);
+					if (i > h->d)
+						return searchR(h->r, v, d);
+				}
+
+				void inaertR(link& h, Item x, int d)
+				{
+					int i = digit(x.key(), d);
+					if (h == 0)
+						h = new node(i);
+					if (i == NULLdigit)
+						return;
+					if (i < h->d)
+						insertR(h->l, x, d);
+					if (i == h->d)
+						insertR(h->m, x, d + 1)
+					if (i > h->d)
+						insertR(h->r, x, d);
+				}
+			public:
+				ST(int maxN)
+				{
+					head = 0;
+				}
+
+				Item search(Key v)
+				{
+					return searchR(head, v, 0);
+				}
+
+				void insert(Item x)
+				{
+					insertR(head, x, 0);
+				}
+			};
+		}
+
+		namespace nsHybridTST
+		{
+			const int R = 25;
+
+			// Программа 15.10 Определения типов узлов в гибридном TST - дереве
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					Item item;
+					int d;
+					node * l, *m, *r;
+
+					node(Item x, int k)
+					{
+						item = x;
+						d = k;
+						l = 0;
+						m = 0;
+						r = 0;
+					}
+
+					node(node* h, int k)
+					{
+						d = k;
+						l = 0;
+						m = h;
+						r = 0;
+					}
+
+					int internal()
+					{
+						return d != NULLdigit;
+					}
+				};
+
+				typedef node *link;
+				link heads[R];
+				Item nullItem;
+
+				link split(link p, link q, int d)
+				{
+					int pd = digit(p->item.key(), d),
+						qd = digit(q->item.key(), d);
+					link t = new node(nullItem, qd);
+					if (pd < qd)
+					{
+						t->m = q;
+						t->l = new node(p, pd);
+					}
+					if (pd == qd)
+					{
+						t->m = split(p, q, d + 1);
+					}
+					if (pd > qd)
+					{
+						t->m = q;
+						t->r = new node(p, pd);
+					}
+					return t;
+				}
+
+				link newext(Item x)
+				{
+					return new node(x, NULLdigit);
+				}
+
+				void insertR(link& h, Item x, int d)
+				{
+					int i = digit(x.key(), d);
+					if (h == 0)
+					{
+						h = new node(newext(x), i);
+						return;
+					}
+					if (!h->internal())
+					{
+						h = split(newext(x), h, d);
+						return;
+					}
+					if (i < h->d)
+						insertR(h->l, x, d);
+					if (i == h->d)
+						insertR(h->m, x, d + 1);
+					if (i > h->d)
+						insertR(h->r, x, d);
+				}
+
+				Item searchR(link h, Key v, int d)
+				{
+					if (h == 0)
+						return nullItem;
+					if (h->internal())
+					{
+						int i = digit(v, d), k = h->d;
+						if (i < k)
+							return searchR(h->l, v, d);
+						if (i == k)
+							return searchR(h->m, v, d + 1);
+						if (i > k)
+							return searchR(h->r, v, d);
+					}
+					if (v == h->item.key())
+						return h->item;
+					return nullItem;
+				}
+
+			public:
+				// Программа 15.11 Вставка в гибридное TST - дерево для АТД таблицы символов
+				ST(int maxN)
+				{
+					for (int i = 0; i < R; i++)
+						heads[i] = 0;
+				}
+
+				void insert(Item x)
+				{
+					insertR(heads[digit(x.key(), 0)], x, 1);
+				}
+
+				// Программа 15.12 Поиск в гибридном TST - дереве для АТД таблицы символов
+				Item search(Key v)
+				{
+					return searchR(heads[digit(v, 0)], v, 1);
+				}
 			};
 		}
 	}

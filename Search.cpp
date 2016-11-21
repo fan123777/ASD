@@ -3,6 +3,7 @@
 #include "BalancedTrees.h"
 #include "Hashing.h"
 #include "BitwiseSearch.h"
+#include "ExternalSearch.h"
 
 namespace nsSearch
 {
@@ -11,6 +12,7 @@ namespace nsSearch
 		// nsCharacterTablesAndBinarySearchTrees::main();
 		// nsBalancedTrees::main();
 		// nsHashing::main();
-		nsBitwiseSearch::main();
+		// nsBitwiseSearch::main();
+		nsExternalSearch::main();
 	}
 }

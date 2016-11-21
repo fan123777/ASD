@@ -88,6 +88,7 @@
     <ClCompile Include="DataStructures.cpp" />
     <ClCompile Include="ElementaryDataStructures.cpp" />
     <ClCompile Include="ElementarySortingMethods.cpp" />
+    <ClCompile Include="ExternalSearch.cpp" />
     <ClCompile Include="Hashing.cpp" />
     <ClCompile Include="Introduction.cpp" />
     <ClCompile Include="AnalysisPrinciples.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="ElementarySortingMethods.h" />
+    <ClInclude Include="ExternalSearch.h" />
     <ClInclude Include="Hashing.h" />
     <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />

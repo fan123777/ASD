@@ -73,6 +73,9 @@
     <Filter Include="4 Search\15 Bitwise Search">
       <UniqueIdentifier>{3ed17fbb-48cb-45e0-8796-80f7cc287e63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4 Search\16 External search">
+      <UniqueIdentifier>{43df687c-59a4-4c25-bb6d-acc7fa8631a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -180,6 +183,9 @@
     <ClCompile Include="BitwiseSearch.cpp">
       <Filter>4 Search\15 Bitwise Search</Filter>
     </ClCompile>
+    <ClCompile Include="ExternalSearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -283,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="BitwiseSearch.h">
       <Filter>4 Search\15 Bitwise Search</Filter>
+    </ClInclude>
+    <ClInclude Include="ExternalSearch.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
