@@ -1401,5 +1401,235 @@ namespace nsSearch
 				}
 			};
 		}
+
+		namespace nsBTree
+		{
+			const int M = 8;
+
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				// Программа 16.1 Определения типов узлов В - дерева
+				struct entry
+				{
+					Key key;
+					Item item;
+					struct node *next;
+				};
+
+				struct node
+				{
+					int m;
+					entry b[M];
+					node()
+					{
+						m = 0;
+					}
+				};
+
+				typedef node *link;
+				link head;
+				Item nullItem;
+				int HT;
+				int N;
+
+				Item searchR(link h, Key v, int ht)
+				{
+					int j;
+					if (ht == 0)
+					for (j = 0; j < h->m; j++)
+					{
+						if (v == h->b[j].key)
+							return h->b[j].item;
+					}
+					else
+					for (j = 0; j < h->m; j++)
+						if ((j + 1 == h->m) || (v < h->b[j + l].key))
+						return searchR(h->b[j].next, v, ht - 1);
+					return nullItem;
+				}
+
+				link insertR(link h, Item x, int ht)
+				{
+					int i, j;
+					Key v = x.key();
+					entry<Item, Key> t;
+					t.key = v;
+					t.item = x;
+					if (ht == 0)
+						for (j = 0; j < h->m; j++)
+						{
+							if (v < h->b[j].key)
+								break;
+						}
+					else
+						for (j = 0; j < h->m; j++)
+							if ((j + 1 == h->m) || (v < h->b[j + l].key))
+							{
+								link u;
+								u = insertR(h->b[j++].next, x, ht - 1);
+								if (u == 0)
+									return 0;
+								t.key = u->b[0].key; t.next = u;
+								break;
+							}
+					for (i = h->m; i > j; i —)
+						h->b[i] = h->b[i - l];
+					h->b[j] = t;
+					if (++h->m < M)
+						return 0;
+					else
+						return split(h);
+				}
+
+			public:
+				// Программа 16.2 Поиск в В - дереве
+				Item search(Key v)
+				{
+					return searchR(head, v, HT);
+				}
+
+				// Программа 16.3 Вставка в В - дерево
+				ST(int maxN)
+				{
+					N = 0;
+					HT = 0;
+					head = new node;
+				}
+
+				void insert(Item item)
+				{
+					link u = insertR(head, item, HT);
+					if (u == 0)
+						return;
+					link t = new node();
+					t->m = 2;
+					t->b[0].key = head->b[0].key;
+					t->b[l].key = u->b[0].key;
+					t->b[0].next = head;
+					t->b[l].next = u;
+					head = t; HT++;
+				}
+
+				// Программа 16.4 Разделение узла В - дерева
+				link split(link h)
+				{
+					link t = new nodeQ;
+					for (int j = 0; j < M / 2; j++)
+						t->b[j] = h->b[M / 2 + j];
+					h->m = M / 2; t->m = M / 2;
+					return t;
+				}
+			};
+		}
+
+		namespace nsExtensibleHashing
+		{
+			const int M = 5;
+
+			// Программа 16.5 Структуры данных расширяемого хеширования
+			template <class Item, class Key>
+			class ST
+			{
+			private:
+				struct node
+				{
+					int m;
+					Item b[M];
+					int k;
+					node()
+					{
+						m = 0;
+						k = 0;
+					}
+				};
+
+				typedef node *link;
+				link* dir;
+				Item nullItem;
+				int N, d, D;
+
+				Item search(link h, Key v)
+				{
+					for (int j = 0; j < h->m; j++)
+						if (V == h->b[j].key())
+							return h->b[j];
+					return nullItem;
+				}
+
+				void split(link h)
+				{
+					link t = new node;
+					while (h->m == 0 | | h->m == M)
+					{
+						h->m = t->m = 0;
+						for (int j = 0; j < M; j++)
+						if (bits(h->b[j].key(), h->k, 1) == 0)
+							h->b[h->m++] == h->b[j];
+						else
+							t->b[t->m++] = h->b[j];
+						t->k = ++(h->k);
+					}
+					insertDIR(t, t->k);
+				}
+
+				void insert(link h, Item x)
+				{
+					int j; Key v = x.key();
+					for (j = 0; j < h->m;j++)
+					if (v < h->b[j].key())
+						break;
+					for (int i = (h->m)++; i > j; i--)
+						h->b[i] = h->b[i-1]
+					h->b[j] = x;
+					if (h->m == M)
+						split(h);
+				}
+
+			public:
+				ST(int maxN)
+				{
+					N = 0;
+					d = 0;
+					D = 1;
+					dir = new link[D];
+					dir[0] = new node;
+				}
+
+				// Программа 16.6 Поиск в таблице расширяемого хеширования
+				Item search(Key v)
+				{
+					return search(dir[bits(v, 0, d)], v);
+				}
+
+				// Программа 16.7 Вставка в расширяемую хеш - таблицу
+				void insert(Item x)
+				{
+					insert(dir[bits(x.key(), 0, d)], x);
+				}
+
+				// Программа 16.8 Вставка в каталог расширяемого хеширования
+				void insertDIR(link t, int k)
+				{
+					int i, m, x = bits(t->b[0].key(), 0, k);
+					while (d < k)
+					{
+						link *old = dir;
+						d += 1;
+						D += D;
+						dir = new link[D];
+						for (i = 0; i < D; i++)
+							dir[i] = old[i / 2];
+						if (d < k)
+							dir[bits(x, 0, d)Al] = new node;
+					}
+					for (m = 1; k < d; k++)
+						m *= 2;
+					for (i = 0; i < m; i++)
+						dir[x*m + i] = t;
+				}
+			};
+		}
 	}
 }
