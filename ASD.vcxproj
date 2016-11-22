@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractDataTypes.cpp" />
+    <ClCompile Include="AlgorithmsOnGraphs.cpp" />
     <ClCompile Include="Analysis.cpp" />
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="BalancedTrees.cpp" />
@@ -89,6 +90,7 @@
     <ClCompile Include="ElementaryDataStructures.cpp" />
     <ClCompile Include="ElementarySortingMethods.cpp" />
     <ClCompile Include="ExternalSearch.cpp" />
+    <ClCompile Include="GraphPropertiesTypes.cpp" />
     <ClCompile Include="Hashing.cpp" />
     <ClCompile Include="Introduction.cpp" />
     <ClCompile Include="AnalysisPrinciples.cpp" />
@@ -115,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDataTypes.h" />
+    <ClInclude Include="AlgorithmsOnGraphs.h" />
     <ClInclude Include="Analysis.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="BalancedTrees.h" />
@@ -127,6 +130,7 @@
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="ElementarySortingMethods.h" />
     <ClInclude Include="ExternalSearch.h" />
+    <ClInclude Include="GraphPropertiesTypes.h" />
     <ClInclude Include="Hashing.h" />
     <ClInclude Include="Introduction.h" />
     <ClInclude Include="AnalysisPrinciples.h" />

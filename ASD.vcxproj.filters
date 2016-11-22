@@ -76,6 +76,12 @@
     <Filter Include="4 Search\16 External search">
       <UniqueIdentifier>{43df687c-59a4-4c25-bb6d-acc7fa8631a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5 Algorithms on graphs">
+      <UniqueIdentifier>{e2f38757-6552-4d7f-82eb-c4ad48758195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5 Algorithms on graphs\17 Graph Properties and Types">
+      <UniqueIdentifier>{34f7e092-88de-4da6-ace0-b5f66d92ca32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -183,8 +189,14 @@
     <ClCompile Include="BitwiseSearch.cpp">
       <Filter>4 Search\15 Bitwise Search</Filter>
     </ClCompile>
+    <ClCompile Include="AlgorithmsOnGraphs.cpp">
+      <Filter>5 Algorithms on graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphPropertiesTypes.cpp">
+      <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
+    </ClCompile>
     <ClCompile Include="ExternalSearch.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>4 Search\16 External search</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,8 +302,14 @@
     <ClInclude Include="BitwiseSearch.h">
       <Filter>4 Search\15 Bitwise Search</Filter>
     </ClInclude>
+    <ClInclude Include="AlgorithmsOnGraphs.h">
+      <Filter>5 Algorithms on graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphPropertiesTypes.h">
+      <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
+    </ClInclude>
     <ClInclude Include="ExternalSearch.h">
-      <Filter>Header Files</Filter>
+      <Filter>4 Search\16 External search</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
