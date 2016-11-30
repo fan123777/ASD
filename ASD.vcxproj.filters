@@ -198,6 +198,9 @@
     <ClCompile Include="ExternalSearch.cpp">
       <Filter>4 Search\16 External search</Filter>
     </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="ExternalSearch.h">
       <Filter>4 Search\16 External search</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

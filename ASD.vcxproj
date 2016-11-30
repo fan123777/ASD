@@ -90,6 +90,7 @@
     <ClCompile Include="ElementaryDataStructures.cpp" />
     <ClCompile Include="ElementarySortingMethods.cpp" />
     <ClCompile Include="ExternalSearch.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphPropertiesTypes.cpp" />
     <ClCompile Include="Hashing.cpp" />
     <ClCompile Include="Introduction.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="ElementarySortingMethods.h" />
     <ClInclude Include="ExternalSearch.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphPropertiesTypes.h" />
     <ClInclude Include="Hashing.h" />
     <ClInclude Include="Introduction.h" />
