@@ -108,6 +108,7 @@
     <ClCompile Include="RecursionAndTrees.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="SearchItem.cpp" />
+    <ClCompile Include="SearchOnGraphs.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="SortList.cpp" />
     <ClCompile Include="SpecialPurposeSortingMethods.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="RecursionAndTrees.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="SearchItem.h" />
+    <ClInclude Include="SearchOnGraphs.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="SortList.h" />
     <ClInclude Include="SpecialPurposeSortingMethods.h" />

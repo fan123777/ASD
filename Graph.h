@@ -514,6 +514,67 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// search
+			template <class Graph> class DFS
+			{
+				int cnt;
+				const Graph &G;
+				std::vector <int> ord;
+
+				void searchC(int v)
+				{
+					ord[v] = cnt++;
+					auto A = G.getIterator(v);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (ord[t] == -1)
+						searchC(t);
+				}
+
+			public:
+				DFS(const Graph &G, int v = 0)
+					:G(G), cnt(0), ord(G.V(), -1)
+				{
+					searchC(v);
+				}
+
+				int count() const
+				{
+					return cnt;
+				}
+
+				int operator[](int v) const
+				{
+					return ord[v];
+				}
+			};
+
+			template <class Graph> class Search
+			{
+			protected:
+				const Graph &G;
+				int cnt;
+				std::vector <int> ord;
+				virtual void searchC(Edge) = 0;
+
+				void search()
+				{
+					for (int v = 0; v < G.V(); v++)
+					if (ord[v] == -1)
+						searchC(Edge(v, v));
+				}
+			public:
+				Search(const Graph &G)
+					: G(G), ord(G.V(), -1), cnt(0)
+				{
+
+				}
+
+				int operator[](int v) const { return ord[v]; }
+			};
+
+			// get graph
+			std::vector<Edge> getDFSGraphEdges(int& v);
+
 			// -----
 
 			template <typename Graph>
@@ -537,7 +598,7 @@ namespace nsAlgorithmsOnGraphs
 
 		namespace nsChapter
 		{
-
+			// Chapter 17
 			// Программа 17.1.Интерфейс АТД графа
 			struct Edge
 			{
@@ -1001,6 +1062,68 @@ namespace nsAlgorithmsOnGraphs
 						std::cout << std::endl;
 					}
 				}
+			};
+
+			// Chapter 18
+			// Программа 18.1.Поиск в глубину связной компоненты
+			template <class Graph> class cDFS
+			{
+				int cnt;
+				const Graph &G;
+				std::vector <int> ord;
+
+				void searchC(int v)
+				{
+					ord[v] = cnt++;
+					auto A = G.getIterator(v);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (ord[t] == -1)
+						searchC(t);
+				}
+
+			public:
+				cDFS(const Graph &G, int v = 0)
+					:G(G), cnt(O), ord(G.V(), -1)
+				{
+					searchC(v);
+				}
+
+				int count() const
+				{
+					return cnt;
+				}
+
+				int operator[](int v) const
+				{
+					return ord[v];
+				}
+			};
+
+			std::vector<Edge> getDFSGraphEdges(int& v);
+
+			// Программа 18.2.Поиск на графе
+			template <class Graph> class SEARCH
+			{
+			protected:
+				const Graph &G;
+				int cnt;
+				std::vector <int> ord;
+				virtual void searchC(Edge) = 0;
+
+				void search()
+				{
+					for (int v = 0; v < G.V(); v++)
+					if (ord[v] == -1)
+						searchC(Edge(v, v));
+				}
+
+			public:
+				SEARCH(const Graph &G)
+					: G(G), ord(G.V(), -1), cnt(0)
+				{
+				}
+
+				int operator[](int v) const { return ord[v]; }
 			};
 		}
 	}

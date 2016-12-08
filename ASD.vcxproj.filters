@@ -82,6 +82,9 @@
     <Filter Include="5 Algorithms on graphs\17 Graph Properties and Types">
       <UniqueIdentifier>{34f7e092-88de-4da6-ace0-b5f66d92ca32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5 Algorithms on graphs\18 Search on Graphs">
+      <UniqueIdentifier>{ae119abd-37db-4d39-bd54-689647ced9f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -201,6 +204,9 @@
     <ClCompile Include="Graph.cpp">
       <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
     </ClCompile>
+    <ClCompile Include="SearchOnGraphs.cpp">
+      <Filter>5 Algorithms on graphs\18 Search on Graphs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -316,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="Graph.h">
       <Filter>5 Algorithms on graphs\17 Graph Properties and Types</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchOnGraphs.h">
+      <Filter>5 Algorithms on graphs\18 Search on Graphs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

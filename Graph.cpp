@@ -8,7 +8,18 @@ namespace nsAlgorithmsOnGraphs
 	{
 		namespace nsGraph
 		{
-		
+			std::vector<Edge> getDFSGraphEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 2 }, { 0, 5 },
+					{ 1, 7 },
+					{ 2, 6 },
+					{ 3, 4 }, { 3, 5 },
+					{ 4, 5 }, { 4, 6 }, { 4, 7 },
+				};
+				v = 8;
+				return edges;
+			}
 		}
 
 		namespace nsChapter
