@@ -515,7 +515,7 @@ namespace nsAlgorithmsOnGraphs
 			};
 
 			// search
-			template <class Graph> class DFS
+			template <class Graph> class sDFS
 			{
 				int cnt;
 				const Graph &G;
@@ -531,7 +531,7 @@ namespace nsAlgorithmsOnGraphs
 				}
 
 			public:
-				DFS(const Graph &G, int v = 0)
+				sDFS(const Graph &G, int v = 0)
 					:G(G), cnt(0), ord(G.V(), -1)
 				{
 					searchC(v);
@@ -572,28 +572,191 @@ namespace nsAlgorithmsOnGraphs
 				int operator[](int v) const { return ord[v]; }
 			};
 
-			// get graph
-			std::vector<Edge> getDFSGraphEdges(int& v);
-
-			// -----
-
-			template <typename Graph>
-			class IO
+			template <class Graph>
+			class DFS : public Search<Graph>
 			{
+				std::vector<int> st;
+				void searchC(Edge e)
+				{
+					int w = e.w;
+					ord[w] = cnt++;
+					st[e.w] = e.v;
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (ord[t] == -1)
+						searchC(Edge(w, t));
+				}
 			public:
-				static void scan(Graph& G);
+				DFS(const Graph &G)
+					: Search<Graph>(G), st(G.V(), -1)
+				{
+						search();
+					}
+
+				int ST(int v) const
+				{
+					return st[v];
+				}
 			};
 
-			template <typename Impl>
+			template <class Graph>
+			class Euler : public Search<Graph>
+			{
+			private:
+				void searchC(Edge e)
+				{
+					int v = e.v, w = e.w;
+					ord[w] = cnt++;
+					std::cout << "-" << w;
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (ord[t] == -1) searchC(Edge(w, t));
+					else if (ord[t] < ord[v])
+						std::cout << "-" << t << "-" << w;
+					if (v != w)
+						std::cout << "-" << v;
+					else
+						std::cout << endl;
+				}
+			public:
+				Euler(Graph &G)
+					:Search<Graph>(G)
+				{
+						search();
+					}
+			};
+
+			// Coherency
+			template <typename Graph>
 			class CC
 			{
 			private:
-				// Код, зависящий от реализации 
+				const Graph & G;
+				int ccnt;
+				std::vector <int> id;
+
+				void ccR(int w)
+				{
+					id[w] = ccnt;
+					auto A = G.getIterator(w);
+					for (int v = A.begin(); !A.end(); v = A.next())
+					if (id[v] == -1)
+						ccR(v);
+				}
+
 			public:
-				CC(const Graph<Impl>& G);
-				int count();
-				bool connect(int, int);
+				CC(const Graph &G)
+					:G(G), ccnt(0), id(G.V(), -1)
+				{
+					for (int v = 0; v < G.V(); v++)
+					if (id[v] == -1)
+					{
+						ccR(v);
+						ccnt++;
+					}
+				}
+
+				int count() const
+				{
+					return ccnt;
+				}
+
+				bool connect(int s, int t) const
+				{
+					return id[s] == id[t];
+				}
 			};
+
+			// Edge Coherency
+			template <class Graph>
+			class EC : public Search<Graph>
+			{
+				int bcnt;
+				std::vector<int> low;
+
+				void searchC(Edge e)
+				{
+					int w = e.w;
+					ord[w] = cnt++;
+					low[w] = ord[w];
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (ord[t] == -1)
+					{
+						searchC(Edge(w, t));
+						if (low[w] > low[t])
+							low[w] = low[t];
+						if (low[t] == ord[t])
+							bcnt++; // w-t является мостом 
+					}
+					else if
+						(t != e.v)
+					if (low[w] > ord[t])
+						low[w] = ord[t];
+				}
+
+			public:
+				EC(const Graph &G)
+					:Search<Graph>(G),bcnt(0), low(G.V(), -1)
+				{
+					search();
+				}
+
+				int count() const
+				{
+					return bcnt + 1;
+				}
+			};
+
+			// two colors
+			template <class Graph> class BI
+			{
+				const Graph &G;
+				bool OK;
+				std::vector<int> vc;
+
+				bool dfsR(int v, int c)
+				{
+					vc[v] = (c + 1) % 2;
+						auto A = G.getIterator(v);
+					for (int t = A.begin(); !A.end(); t = A.next())
+						if (vc[t] == -1)
+						{
+							if (!dfsR(t, vc[v]))
+								return false;
+						}
+					else if (vc[t] != c)
+						return false;
+					return true;
+				}
+			public:
+				BI(const Graph &G) : G(G), OK(true), vc(G.V(), -l)
+				{
+					for (int v = 0; v < G.V(); v++)
+						if (vc[v] == -1)
+							if (!dfsR(v, 0))
+							{
+								OK = false;
+								return;
+							}
+				}
+
+				bool bipartite() const
+				{
+					return OK;
+				}
+
+				int color(int v) const
+				{
+					return vc[v];
+				}
+			};
+
+			// get graph
+			std::vector<Edge> getDFSGraphEdges(int& v);
+			std::vector<Edge> getSearchGraphEdges(int& v);
+			std::vector<Edge> getBridgeGraphEdges(int& v);
+			std::vector<Edge> getBFSGraphEdges(int& v);
 		}
 
 		namespace nsChapter

@@ -20,6 +20,53 @@ namespace nsAlgorithmsOnGraphs
 				v = 8;
 				return edges;
 			}
+
+			std::vector<Edge> getSearchGraphEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 1 }, { 0, 9 },
+					{ 1, 4 }, { 1, 9 },
+					{ 2, 7 }, { 2, 10 }, { 2, 12 },
+					{ 3, 12 },
+					{ 5, 12 },
+					{ 6, 10 }, { 6, 12 },
+					{ 7, 10 },
+					{ 8, 11 }
+				};
+				v = 13;
+				return edges;
+			}
+
+			std::vector<Edge> getBridgeGraphEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 1 }, { 0, 5 }, { 0, 6 },
+					{ 1, 2 },
+					{ 2, 6 },
+					{ 3, 4 }, { 3, 5 },
+					{ 4, 5 }, { 4, 9 }, { 4, 11 },
+					{ 6, 7 },
+					{ 7, 8 }, { 7, 10 },
+					{ 8, 10 },
+					{ 9, 11 },
+					{ 11, 12 }
+				};
+				v = 13;
+				return edges;
+			}
+
+			std::vector<Edge> getBFSGraphEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 2 }, { 0, 5 }, { 0, 7 },
+					{ 1, 7 },
+					{ 2, 6 },
+					{ 3, 4 }, { 3, 5 },
+					{ 4, 5 }, { 4, 6 }, { 4, 7 },
+				};
+				v = 8;
+				return edges;
+			}
 		}
 
 		namespace nsChapter
