@@ -46,6 +46,10 @@ namespace nsAlgorithmsOnGraphs
 			CC<Graph<DenseImpl>> c(G2);
 			Euler<Graph<DenseImpl>> e(G2);
 			EC<Graph<DenseImpl>> ec(G2);
+			BFS<Graph<DenseImpl>> b(G2);
+			// Например, после построения объекта bfs класса BFS<Graph> может использовать следующий программный код для распечатки пути, ведущего из w в v:
+			// for (t = w; t != w; t = bfs.ST(t)) cout << t << "-";
+			// cout << v << endl;
 		}
 	}
 }

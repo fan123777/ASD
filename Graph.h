@@ -626,6 +626,82 @@ namespace nsAlgorithmsOnGraphs
 					}
 			};
 
+			template <class Graph>
+			class BFS : public Search<Graph>
+			{
+				std::vector<int> st;
+
+				void searchC(Edge e)
+				{
+					nsCommon::Queue<Edge> Q;
+					Q.put(e);
+					ord[e.w] = cnt++;
+					while (!Q.empty())
+					if (ord[(e = Q.get()).w] == -1)
+					{
+						e = Q.get();
+						st[e.w] = e.v;
+						auto A = G.getIterator(e.w);
+						for (int t = A.begin(); !A.end(); t = A.next())
+							if (ord[t] == -1)
+							{
+								Q.put(Edge(e.w, t));
+								ord[t] = cnt++;
+							}
+					}
+				}
+
+			public:
+				BFS(Graph &G)
+					: Search<Graph>(G), st(G.V(), -1)
+				{
+					search();
+				}
+
+				int ST(int v) const
+				{
+					return st[v];
+				}
+			};
+
+			template <class Graph>
+			class PFS : public Search<Graph>
+			{
+				std::vector<int> st;
+
+				void searchC(Edge e)
+				{
+					GQ<Edge> Q(G.V());
+					Q.put(e);
+					ord[e.w] = cnt++;
+					while (!Q.empty())
+					{
+						e = Q.get();
+						st[e.w] = e.v;
+						auto A =g.getIteraor(e.w);
+						for (int t = A.begin(); !A.end(); t = A.next())
+						if (ord[t] == -1)
+						{
+							Q.put(Edge(e.w, t));
+							ord[t] = cnt++;
+						}
+						else if (st[t] == -1)
+							Q.update(Edge(e.w, t));
+					}
+				}
+			public:
+				PFS(Graph &G)
+					:Search<Graph>(G), st(G.V(), -1)
+				{
+					search();
+				}
+
+				int ST(int v) const
+				{
+					return st[v];
+				}
+			};
+
 			// Coherency
 			template <typename Graph>
 			class CC
@@ -757,6 +833,42 @@ namespace nsAlgorithmsOnGraphs
 			std::vector<Edge> getSearchGraphEdges(int& v);
 			std::vector<Edge> getBridgeGraphEdges(int& v);
 			std::vector<Edge> getBFSGraphEdges(int& v);
+
+			// Программа 18.11.Реализация рандомизированной очереди
+			template <class Item>
+			class GQ
+			{
+			private:
+				std::vector<Item> s;
+				int N;
+
+			public:
+				GQ(int maxN) : s(maxN + 1), N(0)
+				{
+				}
+
+				int empty() const
+				{
+					return N == 0;
+				}
+				void put(Item item)
+				{
+					s[N++] == item;
+				}
+
+				void update(Item x)
+				{
+				}
+
+				Item get()
+				{
+					int i = int(N*rand() / (1.0 + RAND_MAX))
+						Item t = s[i];
+					s[i] = s[N - 1];
+					s[N - 1] = t;
+					return s[--N];
+				}
+			};
 		}
 
 		namespace nsChapter
