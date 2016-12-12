@@ -87,6 +87,7 @@
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DataStructures.cpp" />
+    <ClCompile Include="DigraphsAndDirectedAcyclicGraph.cpp" />
     <ClCompile Include="ElementaryDataStructures.cpp" />
     <ClCompile Include="ElementarySortingMethods.cpp" />
     <ClCompile Include="ExternalSearch.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="DataStructures.h" />
+    <ClInclude Include="DigraphsAndDirectedAcyclicGraph.h" />
     <ClInclude Include="ElementaryDataStructures.h" />
     <ClInclude Include="ElementarySortingMethods.h" />
     <ClInclude Include="ExternalSearch.h" />

@@ -283,6 +283,7 @@ namespace nsAlgorithmsOnGraphs
 			template <typename Graph>
 			void show(Graph& G)
 			{
+				std::cout << "Adjacency list :"<< std::endl;
 				for (int v = 0; v < G.V(); v++)
 				{
 					std::cout.width(2);
@@ -300,6 +301,7 @@ namespace nsAlgorithmsOnGraphs
 			template <typename Graph>
 			void showEdges(Graph& G)
 			{
+				std::cout << "Edges :" << std::endl;
 				auto edges = getEdges(G);
 				for (auto& element : edges)
 					std::cout << element.v << " - " << element.w << "\n";
@@ -308,6 +310,8 @@ namespace nsAlgorithmsOnGraphs
 			template <typename Graph>
 			void showAdjacencyMatrix(Graph& G)
 			{
+				std::cout << "Adjacency matrix :" << std::endl;
+
 				auto edges = getEdges(G);
 				auto V = G.V();
 				bool directed = G.directed();
@@ -337,6 +341,14 @@ namespace nsAlgorithmsOnGraphs
 				for (int i = 0; i < V; ++i)
 					delete[] matrix[i];
 				delete[] matrix;
+			}
+
+			template <typename Graph>
+			void showAll(Graph& G)
+			{
+				showAdjacencyMatrix(G);
+				show(G);
+				showEdges(G);
 			}
 
 			// scan Graph
@@ -643,11 +655,11 @@ namespace nsAlgorithmsOnGraphs
 						st[e.w] = e.v;
 						auto A = G.getIterator(e.w);
 						for (int t = A.begin(); !A.end(); t = A.next())
-							if (ord[t] == -1)
-							{
-								Q.put(Edge(e.w, t));
-								ord[t] = cnt++;
-							}
+						if (ord[t] == -1)
+						{
+							Q.put(Edge(e.w, t));
+							ord[t] = cnt++;
+						}
 					}
 				}
 
@@ -655,8 +667,8 @@ namespace nsAlgorithmsOnGraphs
 				BFS(Graph &G)
 					: Search<Graph>(G), st(G.V(), -1)
 				{
-					search();
-				}
+						search();
+					}
 
 				int ST(int v) const
 				{
@@ -678,7 +690,7 @@ namespace nsAlgorithmsOnGraphs
 					{
 						e = Q.get();
 						st[e.w] = e.v;
-						auto A =g.getIteraor(e.w);
+						auto A = g.getIteraor(e.w);
 						for (int t = A.begin(); !A.end(); t = A.next())
 						if (ord[t] == -1)
 						{
@@ -693,8 +705,8 @@ namespace nsAlgorithmsOnGraphs
 				PFS(Graph &G)
 					:Search<Graph>(G), st(G.V(), -1)
 				{
-					search();
-				}
+						search();
+					}
 
 				int ST(int v) const
 				{
@@ -773,10 +785,10 @@ namespace nsAlgorithmsOnGraphs
 
 			public:
 				EC(const Graph &G)
-					:Search<Graph>(G),bcnt(0), low(G.V(), -1)
+					:Search<Graph>(G), bcnt(0), low(G.V(), -1)
 				{
-					search();
-				}
+						search();
+					}
 
 				int count() const
 				{
@@ -794,13 +806,13 @@ namespace nsAlgorithmsOnGraphs
 				bool dfsR(int v, int c)
 				{
 					vc[v] = (c + 1) % 2;
-						auto A = G.getIterator(v);
+					auto A = G.getIterator(v);
 					for (int t = A.begin(); !A.end(); t = A.next())
-						if (vc[t] == -1)
-						{
-							if (!dfsR(t, vc[v]))
-								return false;
-						}
+					if (vc[t] == -1)
+					{
+						if (!dfsR(t, vc[v]))
+							return false;
+					}
 					else if (vc[t] != c)
 						return false;
 					return true;
@@ -809,12 +821,12 @@ namespace nsAlgorithmsOnGraphs
 				BI(const Graph &G) : G(G), OK(true), vc(G.V(), -l)
 				{
 					for (int v = 0; v < G.V(); v++)
-						if (vc[v] == -1)
-							if (!dfsR(v, 0))
-							{
-								OK = false;
-								return;
-							}
+					if (vc[v] == -1)
+					if (!dfsR(v, 0))
+					{
+						OK = false;
+						return;
+					}
 				}
 
 				bool bipartite() const
@@ -833,6 +845,20 @@ namespace nsAlgorithmsOnGraphs
 			std::vector<Edge> getSearchGraphEdges(int& v);
 			std::vector<Edge> getBridgeGraphEdges(int& v);
 			std::vector<Edge> getBFSGraphEdges(int& v);
+			std::vector<Edge> getDigraphEdges(int& v);
+
+			// reverse
+			template <class inGraph, class outGraph>
+			void reverse(const inGraph &G, outGraph &R)
+			{
+
+				for (int v = 0; v < G.V(); v++)
+				{
+					auto A = G.getIterator(v);
+					for (int w = A.begin(); !A.end(); w = A.next())
+						R.insert(Edge(w, v));
+				}
+			}
 
 			// Программа 18.11.Реализация рандомизированной очереди
 			template <class Item>

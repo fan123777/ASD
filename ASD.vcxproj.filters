@@ -85,6 +85,9 @@
     <Filter Include="5 Algorithms on graphs\18 Search on Graphs">
       <UniqueIdentifier>{ae119abd-37db-4d39-bd54-689647ced9f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5 Algorithms on graphs\19 Digraphs and directed acyclic graph">
+      <UniqueIdentifier>{02c6b681-0244-47f9-8ec1-042bfc81f5dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -207,6 +210,9 @@
     <ClCompile Include="SearchOnGraphs.cpp">
       <Filter>5 Algorithms on graphs\18 Search on Graphs</Filter>
     </ClCompile>
+    <ClCompile Include="DigraphsAndDirectedAcyclicGraph.cpp">
+      <Filter>5 Algorithms on graphs\19 Digraphs and directed acyclic graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -325,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="SearchOnGraphs.h">
       <Filter>5 Algorithms on graphs\18 Search on Graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="DigraphsAndDirectedAcyclicGraph.h">
+      <Filter>5 Algorithms on graphs\19 Digraphs and directed acyclic graph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
