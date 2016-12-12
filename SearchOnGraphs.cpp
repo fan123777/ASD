@@ -20,36 +20,43 @@ namespace nsAlgorithmsOnGraphs
 
 			Graph<DenseImpl> G(v);
 			addEdges(G, edges);
+			// showAll(G);
 			sDFS<Graph<DenseImpl>> dfs(G, 0);
-			int count= dfs.count();
+			int count = dfs.count();
+			// dfs.show();
 
-			for (int i = 0; i < G.V(); i++)
-				cout << dfs[i] << " ";
-			cout << endl;
-			show(G);
-
+			
 			Graph<SparseImpl> G1(v);
 			addEdges(G1, edges);
-			sDFS<Graph<SparseImpl>> dfs1(G1, 0);
-			count = dfs1.count();
-
-			for (int i = 0; i < G1.V(); i++)
-				cout << dfs1[i] << " ";
-			cout << endl;
-			show(G1);
-
-
+			// showAll(G1);
+			DFS<Graph<SparseImpl>> dfs1(G1);
+			// dfs1.show();
+			
 			edges = getSearchGraphEdges(v);
 			Graph<DenseImpl> G2(v);
-
+			addEdges(G2, edges);
+			showAll(G2);
 			DFS<Graph<DenseImpl>> d(G2);
+			d.show();
+
 			CC<Graph<DenseImpl>> c(G2);
+			int cc = c.count();
+			bool connected = c.connect(1, 6);
+
 			Euler<Graph<DenseImpl>> e(G2);
+			BI<Graph<DenseImpl>> bi(G2);
 			EC<Graph<DenseImpl>> ec(G2);
-			BFS<Graph<DenseImpl>> b(G2);
+
+			edges = getBFSGraphEdges(v);
+			Graph<DenseImpl> G3(v);
+			addEdges(G3, edges);
+			BFS<Graph<DenseImpl>> b(G3);
 			// Например, после построения объекта bfs класса BFS<Graph> может использовать следующий программный код для распечатки пути, ведущего из w в v:
-			// for (t = w; t != w; t = bfs.ST(t)) cout << t << "-";
-			// cout << v << endl;
+			// for (int t = 0; t != 3; t = b.ST(t))
+			//	cout << t << "-";
+			// cout << 3 << endl;
+
+			PFS<Graph<DenseImpl>> pfs(G3);
 		}
 	}
 }

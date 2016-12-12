@@ -88,6 +88,27 @@ namespace nsAlgorithmsOnGraphs
 				v = 13;
 				return edges;
 			}
+
+			std::vector<Edge> getDAGEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 0 }, { 0, 6 }, { 0, 1 }, { 0, 5 }, { 0, 2 }, { 0, 3 },
+					{ 1, 1 },
+					{ 2, 2 }, { 2, 3 }, 
+					{ 3, 3 }, { 3, 5 }, { 3, 4 },
+					{ 4, 4 }, { 4, 9 },
+					{ 5, 5 }, 
+					{ 6, 6 }, { 6, 4 }, { 6, 9 },
+					{ 7, 7 }, { 7, 6 },
+					{ 8, 8 }, { 8, 7 },
+					{ 9, 9 }, { 9, 12 }, { 9, 10 }, { 9, 11 },
+					{ 10, 10 },
+					{ 11, 11 }, { 11, 12 },
+					{ 12, 12 },
+				};
+				v = 13;
+				return edges;
+			}
 		}
 
 		namespace nsChapter

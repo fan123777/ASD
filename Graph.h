@@ -558,6 +558,15 @@ namespace nsAlgorithmsOnGraphs
 				{
 					return ord[v];
 				}
+
+				void show() const
+				{
+					std::cout << "Number of visited vertex: " << cnt << std::endl;
+					std::cout << "Order of visited vertex: " << std::endl;
+					for (int i = 0; i < G.V(); i++)
+						std::cout << ord[i] << " ";
+					std::cout << endl;
+				}
 			};
 
 			template <class Graph> class Search
@@ -588,6 +597,7 @@ namespace nsAlgorithmsOnGraphs
 			class DFS : public Search<Graph>
 			{
 				std::vector<int> st;
+
 				void searchC(Edge e)
 				{
 					int w = e.w;
@@ -598,16 +608,30 @@ namespace nsAlgorithmsOnGraphs
 					if (ord[t] == -1)
 						searchC(Edge(w, t));
 				}
+
 			public:
 				DFS(const Graph &G)
 					: Search<Graph>(G), st(G.V(), -1)
 				{
-						search();
-					}
+					search();
+				}
 
 				int ST(int v) const
 				{
 					return st[v];
+				}
+
+				void show() const
+				{
+					std::cout << "Number of visited vertex: " << cnt << std::endl;
+					std::cout << "Order of visited vertex: " << std::endl;
+					for (int i = 0; i < G.V(); i++)
+						std::cout << ord[i] << " ";
+					std::cout << endl;
+					std::cout << "Parent vertex: " << std::endl;
+					for (int i = 0; i < G.V(); i++)
+						std::cout << st[i] << " ";
+					std::cout << endl;
 				}
 			};
 
@@ -634,8 +658,8 @@ namespace nsAlgorithmsOnGraphs
 				Euler(Graph &G)
 					:Search<Graph>(G)
 				{
-						search();
-					}
+					search();
+				}
 			};
 
 			template <class Graph>
@@ -649,7 +673,6 @@ namespace nsAlgorithmsOnGraphs
 					Q.put(e);
 					ord[e.w] = cnt++;
 					while (!Q.empty())
-					if (ord[(e = Q.get()).w] == -1)
 					{
 						e = Q.get();
 						st[e.w] = e.v;
@@ -667,8 +690,8 @@ namespace nsAlgorithmsOnGraphs
 				BFS(Graph &G)
 					: Search<Graph>(G), st(G.V(), -1)
 				{
-						search();
-					}
+					search();
+				}
 
 				int ST(int v) const
 				{
@@ -690,7 +713,7 @@ namespace nsAlgorithmsOnGraphs
 					{
 						e = Q.get();
 						st[e.w] = e.v;
-						auto A = g.getIteraor(e.w);
+						auto A = G.getIterator(e.w);
 						for (int t = A.begin(); !A.end(); t = A.next())
 						if (ord[t] == -1)
 						{
@@ -787,8 +810,8 @@ namespace nsAlgorithmsOnGraphs
 				EC(const Graph &G)
 					:Search<Graph>(G), bcnt(0), low(G.V(), -1)
 				{
-						search();
-					}
+					search();
+				}
 
 				int count() const
 				{
@@ -818,7 +841,7 @@ namespace nsAlgorithmsOnGraphs
 					return true;
 				}
 			public:
-				BI(const Graph &G) : G(G), OK(true), vc(G.V(), -l)
+				BI(const Graph &G) : G(G), OK(true), vc(G.V(), -1)
 				{
 					for (int v = 0; v < G.V(); v++)
 					if (vc[v] == -1)
@@ -846,6 +869,7 @@ namespace nsAlgorithmsOnGraphs
 			std::vector<Edge> getBridgeGraphEdges(int& v);
 			std::vector<Edge> getBFSGraphEdges(int& v);
 			std::vector<Edge> getDigraphEdges(int& v);
+			std::vector<Edge> getDAGEdges(int& v);
 
 			// reverse
 			template <class inGraph, class outGraph>
@@ -877,9 +901,10 @@ namespace nsAlgorithmsOnGraphs
 				{
 					return N == 0;
 				}
+
 				void put(Item item)
 				{
-					s[N++] == item;
+					s[N++] = item;
 				}
 
 				void update(Item x)
@@ -888,8 +913,8 @@ namespace nsAlgorithmsOnGraphs
 
 				Item get()
 				{
-					int i = int(N*rand() / (1.0 + RAND_MAX))
-						Item t = s[i];
+					int i = int(N*rand() / (1.0 + RAND_MAX));
+					Item t = s[i];
 					s[i] = s[N - 1];
 					s[N - 1] = t;
 					return s[--N];
