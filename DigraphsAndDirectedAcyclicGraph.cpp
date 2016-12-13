@@ -30,6 +30,11 @@ namespace nsAlgorithmsOnGraphs
 			Graph<DenseImpl> G2(v, true);
 			reverse(G, G2);
 			showAll(G2);
+
+			edges = getDAGEdges(v);
+			Graph<DenseImpl> G3(v, true);
+			addEdges(G3, edges);
+			oDFS<Graph<DenseImpl>> odfs(G3);
 		}
 	}
 }

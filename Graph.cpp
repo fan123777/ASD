@@ -109,6 +109,20 @@ namespace nsAlgorithmsOnGraphs
 				v = 13;
 				return edges;
 			}
+
+			std::vector<Edge> getTransitiveClosureEdges(int& v)
+			{
+				vector<Edge> edges = {
+					{ 0, 0 }, { 0, 2 }, { 0, 5 },
+					{ 1, 1 }, { 1, 0 },
+					{ 2, 2 }, { 2, 1 },
+					{ 3, 3 }, { 3, 4 },
+					{ 4, 4 }, { 4, 5 },
+					{ 5, 5 }, { 5, 4 },
+				};
+				v = 6;
+				return edges;
+			}
 		}
 
 		namespace nsChapter

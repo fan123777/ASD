@@ -870,6 +870,8 @@ namespace nsAlgorithmsOnGraphs
 			std::vector<Edge> getBFSGraphEdges(int& v);
 			std::vector<Edge> getDigraphEdges(int& v);
 			std::vector<Edge> getDAGEdges(int& v);
+			std::vector<Edge> getTransitiveClosureEdges(int& v);
+
 
 			// reverse
 			template <class inGraph, class outGraph>
@@ -918,6 +920,53 @@ namespace nsAlgorithmsOnGraphs
 					s[i] = s[N - 1];
 					s[N - 1] = t;
 					return s[--N];
+				}
+			};
+
+			template <class Graph>
+			class oDFS
+			{
+				const Graph &G;
+				int depth, cnt, cntP;
+				std::vector<int> pre, post;
+
+				void show(char *s, Edge e)
+				{
+					for (int i = 0; i < depth; i++)
+						std::cout << " ";
+					std::cout << e.v << "-" << e.w << s << std::endl;
+				}
+
+				void dfsR(Edge e)
+				{
+					int w = e.w;
+					show(" tree", e);
+					pre[w] = cnt++;
+					depth++;
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					{
+						Edge x(w, t);
+						if (pre[t] == -1)
+							dfsR(x);
+						else if (post[t] == -1)
+							show(" back", x);
+						else if (pre[t] > pre[w])
+							show(" down", x);
+						else
+							show(" cross", x);
+					}
+					post[w] = cntP++;
+					depth--;
+				}
+
+			public:
+				oDFS(const Graph &G)
+					:G(G), cnt(0), cntP(0), pre(G.V(), -1), post(G.V(), -1)
+				{
+					for (int v = 0; v < G.V(); v++)
+					if (pre[v] == -1)
+						dfsR(Edge(v, v));
 				}
 			};
 		}

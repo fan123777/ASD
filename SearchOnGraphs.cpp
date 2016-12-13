@@ -24,7 +24,6 @@ namespace nsAlgorithmsOnGraphs
 			sDFS<Graph<DenseImpl>> dfs(G, 0);
 			int count = dfs.count();
 			// dfs.show();
-
 			
 			Graph<SparseImpl> G1(v);
 			addEdges(G1, edges);
