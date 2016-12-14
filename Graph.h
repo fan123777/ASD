@@ -1024,6 +1024,46 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// Программа 19.9.Транзитивное замыкание графа DAG
+			template <class tcDag, class Dag> class dagTC
+			{
+				tcDag T;
+				const Dag &D;
+				int cnt;
+				std::vector<int> pre;
+
+				void tcR(int w)
+				{
+					pre[w] = cnt++;
+					auto A = D.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					{
+						T.insert(Edge(w, t));
+						if (pre[t] > pre[w])
+							continue;
+						if (pre[t] == -1)
+							tcR(t);
+						for (int i = 0; i < T.V(); i++)
+							if (T.edge(t, i))
+								T.insert(Edge(w, i));
+					}
+				}
+
+			public:
+				dagTC(const Dag &D)
+					: D(D), cnt(0), pre(D.V(), -1), T(D.V(), true)
+				{
+					for (int v = 0; v < D.V(); v++)
+						if (pre[v] == -1)
+							tcR(v);
+				}
+
+				bool reachable(int v, int w) const
+				{
+					return T.edge(v, w);
+				}
+			};
+
 			// traverse DAG
 			template<typename Dag, typename Func>
 			void traverseR(Dag D, int v, Func visit)
@@ -1142,7 +1182,8 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
-
+			// strong components
+			// Программа 19.10. Сильные компоненты (алгоритм Косарайю) 
 		}
 
 		namespace nsChapter
