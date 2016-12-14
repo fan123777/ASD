@@ -35,6 +35,12 @@ namespace nsAlgorithmsOnGraphs
 			Graph<DenseImpl> G3(v, true);
 			addEdges(G3, edges);
 			oDFS<Graph<DenseImpl>> odfs(G3);
+
+			edges = getTransitiveClosureEdges(v);
+			Graph<DenseImpl> G4(v, true);
+			addEdges(G4, edges);
+			TC<Graph<DenseImpl>, Graph<DenseImpl>> tc1(G4);
+			tc<Graph<DenseImpl>> tc2(G4);
 		}
 	}
 }

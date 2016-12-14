@@ -872,7 +872,6 @@ namespace nsAlgorithmsOnGraphs
 			std::vector<Edge> getDAGEdges(int& v);
 			std::vector<Edge> getTransitiveClosureEdges(int& v);
 
-
 			// reverse
 			template <class inGraph, class outGraph>
 			void reverse(const inGraph &G, outGraph &R)
@@ -923,6 +922,7 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// oriented DFS
 			template <class Graph>
 			class oDFS
 			{
@@ -969,6 +969,180 @@ namespace nsAlgorithmsOnGraphs
 						dfsR(Edge(v, v));
 				}
 			};
+
+			// Transitive closure
+			template <class tcGraph, class Graph>
+			class TC
+			{
+				tcGraph T;
+
+			public:
+				TC(const Graph &G) : T(G)
+				{
+					for (int s = 0; s < T.V(); s++)
+						T.insert(Edge(s, s));
+					for (int i = 0; i < T.V(); i++)
+						for (int s = 0; s < T.V(); s++)
+							if (T.edge(s, i))
+								for (int t = 0; t < T.V(); t++)
+									if (T.edge(i, t))
+										T.insert(Edge(s, t));
+				}
+
+				bool reachable(int s, int t) const
+				{
+					return T.edge(s, t);
+				}
+			};
+
+			template <class Graph>
+			class tc
+			{
+				Graph T;
+				const Graph &G;
+
+				void tcR(int v, int w)
+				{
+					T.insert(Edge(v, w));
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+						if (!T.edge(v, t))
+							tcR(v, t);
+				}
+
+			public:
+
+				tc(const Graph &G) : G(G), T(G.V(), true)
+				{
+					for (int v = 0; v < G.V(); v++)
+						tcR(v, v);
+				}
+
+				bool reachable(int v, int w)
+				{
+					return T.edge(v, w);
+				}
+			};
+
+			// traverse DAG
+			template<typename Dag, typename Func>
+			void traverseR(Dag D, int v, Func visit)
+			{
+				visit(v);
+				auto a = D.getIterator(v);
+				for (int t = A.begin(); !A.end(); t = A.next())
+					traverseR(D, t);
+			}
+
+			// binary DAG
+			// Программа 19.5.Представление бинарного дерева в виде двоичного графа DAG
+			// int compressR(link h)
+			// {
+			// 	STx st;
+			// 	if (h == NULL) return 0;
+			// 	l = compressR(h->l);
+			// 	r = compressR(h->r);
+			// 	t = st.index(l, r);
+			// 	adj[t].l = l; adj[t].r = r;
+			// 	return t;
+			// }
+
+			// reverse topological sort
+			// Программа 19.6. Обратная топологическая сортировка
+			template <class Dag>
+			class dagTS
+			{
+				const Dag &D;
+				int cnt, tcnt;
+				std::vector<int> pre, post, postI;
+
+				void tsR(int v)
+				{
+					pre[v] = s cnt++;
+					auto A = D.getIterator(v);
+					for (int t = A.begin(); !A.end(); t = A.next())
+						if (pre[t] == -1)
+							tsR(t);
+					post[v] = tcnt;
+					postI[tcnt++] = v;
+				}
+
+				// Программа 19.7.Топологическая сортировка
+				void tsR1(int v)
+				{
+					pre[v] = cnt++;
+					for (int w = 0; w < D.V(); w++)
+						if (D.edge(w, v))
+							if (pre[w] == -1)
+								tsR1(w);
+					post[v] = tcnt;
+					postI[tcnt++] = v;
+				}
+
+			public:
+				dagTS(const Dag &D)
+					:D(D), tcnt(O), cnt(O),
+					pre(D.V(), -1), post(D.V(), -1), postI(D.V(), -1)
+				{
+					for (int v = 0; v < D.V(); v++)
+						if (pre[v] == -1) tsR(v);
+				}
+
+				int operator[](int v) const
+				{
+					return postI[v];
+				}
+
+				int relabel(int v) const
+				{
+					return post[v];
+				}
+			};
+
+			// Программа 19.8.Топологическая сортировка, основанная на очереди истоков
+			template <class Dag> class dagTS1
+			{
+				const Dag& D;
+				std::vector<int> in, ts, tsI;
+
+			public:
+				dagTS1(const Dag &D) : D(D),
+					in(D.V(), 0), ts(D.V(), -1), tsI(D.V(), -1)
+				{
+					nsCommon::Queue<int> Q;
+					for (int v = 0; v < D.V(); v++)
+					{
+						auto A = D.getIterator(v);
+						for (int t = A.begin(); !A.end(); t = A.next())
+							in[t]++;
+					}
+
+					for (int v = 0; v < D.V(); v++)
+					if (in[v] == 0)
+						Q.put(v);
+					for (int j = 0; !Q.empty(); j++)
+					{
+						ts[j] = Q.get();
+						tsI[ts[j]] = j;
+						auto A = D.getIterator(ts[j]);
+						for (int t = A.begin(); !A.end(); t = A.next())
+						if (--in[t] == 0)
+							Q.put(t);
+					}
+				}
+
+				int operator[] (int v) const
+				{
+					return ts[v];
+				}
+
+				int relabel(int v) const
+				{
+					return tsl[v];
+				}
+			};
+
+
 		}
 
 		namespace nsChapter
