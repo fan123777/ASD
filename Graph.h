@@ -1363,6 +1363,194 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// Программа 20.1 Интерфейс АТД графов со взвешенными ребрами
+			class WEdge
+			{
+			public:
+				WEdge(int, int, double);
+				int v() const;
+				int w() const;
+				double wt() const;
+				bool from(int) const
+				{
+					return true;
+				}
+
+				int other(int) const;
+			};
+
+			template <typename WImpl, typename WEdge>
+			class WGraph
+			{
+			public:
+				WGraph(int v, bool digraph = false)
+				{
+					m_Pimpl.reset(new WImpl(v, digraph));
+				}
+
+				~WGraph()
+				{
+
+				}
+
+				int V() const
+				{
+					return m_Pimpl->V();
+				}
+
+				int E() const
+				{
+					return m_Pimpl->E();
+				}
+
+				bool directed() const
+				{
+					return m_Pimpl->directed();
+				}
+
+				int insert(Edge *)
+				{
+					m_Pimpl->insert(e);
+				}
+
+				int remove(Edge *)
+				{
+					m_Pimpl->remove(e);
+				}
+
+				Edge *edge(int v, int w)
+				{
+					return m_Pimpl->edge(v, w);
+				}
+
+				class adjIterator
+				{
+				public:
+					adjIterator(const WGraph &, int);
+					Edge *begin();
+					Edge *next();
+					bool end();
+				};
+
+				typename WImpl::Iterator getIterator(int v) const
+				{
+					return m_Pimpl->getIterator(v);
+				}
+
+			private:
+				std::shared_ptr<WImpl> m_Pimpl;
+			};
+
+			// Программа 20.2. Пример клиентской функции обработки графа 
+			template <class WGraph, class WEdge>
+			std::vector <WEdge *> wEdges(const WGraph &G)
+			{
+				int E = 0;
+				std::vector <WEdge*> a(G.E());
+				for (int v = 0; v < G.V(); v++)
+				{
+					auto A = G.getIterator(v);
+					for (WEdge* e = A.begin(); !A.end(); e = A.next())
+					if (e->from(v))
+						a[E++] = e;
+				}
+				return a;
+			}
+
+			// Программа 20.3.Класс взвешенного графа(представление в виде матрицы смежности)
+			template <class WEdge>
+			class WDenseImpl
+			{
+				int Vcnt, Ecnt;
+				bool digraph;
+				std::vector<std::vector<WEdge*>> adj;
+
+			public:
+				WDenseImpl(int V, bool digraph = false)
+					:adj(V), Vcnt(V), Ecnt(0), digraph(digraph)
+				{
+					for (int i = 0; i < V; i++)
+						adj[i].assign(V, 0);
+				}
+
+				int V() const
+				{
+					return Vcnt;
+				}
+
+				int E() const
+				{
+					return Ecnt;
+				}
+
+				bool directed() const
+				{
+					return digraph;
+				}
+
+				void insert(WEdge *e)
+				{
+					int v = e->v(), w = e->w();
+					if (adj[v][w] == 0)
+						Ecnt++;
+					adj[v][w] = e;
+
+					if (!digraph)
+						adj[w][v] = e;
+				}
+
+				void remove(WEdge *e)
+				{
+					int v = e->v(), w = e->w();
+					if (adj[v][w] != 0)
+						Ecnt--;
+					adj[v][w] = 0;
+					if (!digraph)
+						adj[w][v] = 0;
+				}
+
+				WEdge* edge(int v, int w) const
+				{
+					return adj[v][w];
+				}
+
+				class Iterator
+				{
+					const WDenseImpl<WEdge>& G;
+					int i, v;
+
+				public:
+					Iterator(const WDenseImpl<WEdge> &G, int v)
+						:G(G), v(v), i(0)
+					{
+					}
+
+					WEdge* begin()
+					{
+						i = -1;
+						return next();
+					}
+
+					WEdge* next()
+					{
+						for (i++; i < G.V(); i++)
+						if (G.edge(v, i))
+							return G.adj[v][i];
+						return 0;
+					}
+
+					bool end() const
+					{
+						return i >= G.V();
+					}
+				};
+
+				Iterator getIterator(int v) const
+				{
+					return Iterator(*this, v);
+				}
+			};
+
 		}
 
 		namespace nsChapter
