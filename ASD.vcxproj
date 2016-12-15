@@ -100,6 +100,7 @@
     <ClCompile Include="List1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MergeAndMergeSort.cpp" />
+    <ClCompile Include="MinimumSpanningTree.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="List1.h" />
     <ClInclude Include="MergeAndMergeSort.h" />
+    <ClInclude Include="MinimumSpanningTree.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Polynom.h" />
     <ClInclude Include="PriorityQueue.h" />

@@ -88,6 +88,9 @@
     <Filter Include="5 Algorithms on graphs\19 Digraphs and directed acyclic graph">
       <UniqueIdentifier>{02c6b681-0244-47f9-8ec1-042bfc81f5dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5 Algorithms on graphs\20 Minimum Spanning Tree">
+      <UniqueIdentifier>{7dfbd1c7-af9b-4166-9f38-2c220a44d7f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,6 +216,9 @@
     <ClCompile Include="DigraphsAndDirectedAcyclicGraph.cpp">
       <Filter>5 Algorithms on graphs\19 Digraphs and directed acyclic graph</Filter>
     </ClCompile>
+    <ClCompile Include="MinimumSpanningTree.cpp">
+      <Filter>5 Algorithms on graphs\20 Minimum Spanning Tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnalysisPrinciples.h">
@@ -334,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="DigraphsAndDirectedAcyclicGraph.h">
       <Filter>5 Algorithms on graphs\19 Digraphs and directed acyclic graph</Filter>
+    </ClInclude>
+    <ClInclude Include="MinimumSpanningTree.h">
+      <Filter>5 Algorithms on graphs\20 Minimum Spanning Tree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

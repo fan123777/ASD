@@ -2,6 +2,7 @@
 #include "GraphPropertiesTypes.h"
 #include "SearchOnGraphs.h"
 #include "DigraphsAndDirectedAcyclicGraph.h"
+#include "MinimumSpanningTree.h"
 
 namespace nsAlgorithmsOnGraphs
 {
@@ -9,6 +10,7 @@ namespace nsAlgorithmsOnGraphs
 	{
 		// nsGraphPropertiesTypes::main();
 		// nsSearchOnGraphs::main();
-		nsDigraphsAndDirectedAcyclicGraph::main();
+		// nsDigraphsAndDirectedAcyclicGraph::main();
+		nsMinimumSpanningTree::main();
 	}
 }

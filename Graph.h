@@ -1184,6 +1184,185 @@ namespace nsAlgorithmsOnGraphs
 
 			// strong components
 			// Программа 19.10. Сильные компоненты (алгоритм Косарайю) 
+			template <class Graph>
+			class SCK
+			{
+				const Graph &G;
+				int cnt, scnt;
+				std::vector<int> postI, postR, id;
+
+				void dfsR(const Graph &G, int w)
+				{
+					id[w] = scnt;
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+						if (id[t] == - 1)
+							dfsR(G, t);
+					postI[cnt++] = w;
+				}
+
+			public:
+				SCK(const Graph &G)
+					: G(G), cnt(0), scnt(0), postI(G.V()), postR(G.V()), id(G.V(), -1)
+				{
+					Graph R(G.V(), true);
+					reverse(G, R);
+					for (int v = 0; v < R.V(); v++)
+						if (id[v] == -1)
+							dfsR(R, v);
+					postR = postI;
+					cnt = sent = 0;
+					id.assign(G.V(), -1);
+					for (int v = G.V() - 1; v >= 0; v--)
+					if (id[postR[v]] == -1)
+					{
+						dfsR(G, postR[v]);
+						scnt++;
+					}
+				}
+
+				int count() const
+				{
+					return scnt;
+				}
+
+				bool stronglyreachable(int v, int w) const
+				{
+					return id[v] == id[w];
+				}
+
+				int ID(int v) const
+				{
+					return id[v];
+				}
+			};
+
+			// Программа 19.11.Сильные компоненты(алгоритм Тарьяна)
+			template <class Graph>
+			class SCT
+			{
+				const Graph& G;
+				nsCommon::Stack<int> S, path;
+				int cnt, scnt;
+				std::vector<int> pre, low, id;
+
+				void scR(int w)
+				{
+					int t;
+					int min = low[w] = pre[w] = cnt++;
+					S.push(w);
+					auto A = G.getIterator(w);
+
+					for (t = A.begin(); !A.end(); t = A.next())
+					{
+						if (pre[t] == -1)
+							scR(t);
+						if (low[t] < min)
+							min = low[t];
+					}
+					if (min < low[w])
+					{
+						low[w] = min;
+						return;
+					}
+					do
+					{
+						id[t = S.pop()] = scnt;
+						low[t] = G.V();
+					} while (t != w);
+					scnt++;
+				}
+
+				// Программа 19.12.Сильные компоненты(алгоритм Габова)
+				void scR1(int w)
+				{
+					int v;
+					pre[w] = cnt++;
+					S.push(w);
+					path.push(w);
+					auto A = G.getIterator(w);
+					for (int t = A.begin(); !A.end(); t = A.next())
+					if (pre[t] == -1)
+						scR1(t);
+					else
+					if (id[t] == -1)
+						while (pre[path.top()] > pre[t])
+							path.pop();
+					if (path.top() == w)
+						path.pop();
+					else
+						return;
+					do
+					{ 
+						id[v = S.pop()] = scnt;
+					}
+					while (v != w);
+					scnt++;
+				}
+
+			public:
+				SCT(const Graph &G)
+					: G(G), cnt(0), scnt(O), pre(G.V(), -1), low(G.V()), id(G.V())
+				{
+					for (int v = 0; v < G.V(); v++)
+					if (pre[v] == -1)
+						scR(v);
+				}
+
+				int count() const
+				{
+					return scnt;
+				}
+
+				bool stronglyreachable(int v, int w) const
+				{
+					return id[v] == id[w];
+				}
+
+				int ID(int v) const
+				{
+					return id[v];
+				}
+			};
+
+			// Программа 19.13. Транзитивное замыкание на основе сильных компонент
+			template <class MyGraph>
+			class TCSC
+			{
+				const MyGraph& G;
+				Graph<DenseImpl> *K;
+
+				dagTC<Graph<DenseImpl>, MyGraph> *Ktc;
+				SCT<MyGraph> *Gsc;
+
+			public:
+				TCSC(const Graph &G)
+					: G(G)
+				{
+					Gsc = new SC<MyGraph>(G);
+					К = new Graph<DenseImpl>(Gsc->count(), true);
+					for (int v = 0; v < G.V(); v++)
+					{
+						auto A = G.getIterator(v);
+						for (int t = A.begin(); !A.end(); t = A.next())
+							K->insert(Edge(Gsc->ID(v), Gsc->ID(t)));
+					}
+					Ktc = new dagTC<Graph<DenseImpl>, MyGraph>(*K);
+				}
+
+				~TCSC()
+				{ 
+					delete K;
+					delete Ktc;
+					delete Gsc;
+				}
+
+				bool reachable(int v, int w)
+				{
+					return Ktc->reachable(Gsc->ID(v), Gsc->ID(w));
+				}
+			};
+
 		}
 
 		namespace nsChapter
