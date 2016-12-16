@@ -123,6 +123,12 @@ namespace nsAlgorithmsOnGraphs
 				v = 6;
 				return edges;
 			}
+
+			std::vector<WEdge> getPrimGraphEdges(int& v)
+			{
+				vector<WEdge> edges;
+				return edges;
+			}
 		}
 
 		namespace nsChapter

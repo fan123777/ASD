@@ -1551,6 +1551,93 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// Программа 20.5. Класс взвешенного графа (списки смежных вершин) 
+			template <class WEdge>
+			class  WSparseImpl
+			{
+				int Vcnt, Ecnt;
+				bool digraph;
+
+				struct node
+				{
+					WEdge* e;
+					node* next;
+					node(WEdge* e, node* next)
+						: e(e), next(next)
+					{
+					}
+				};
+
+				typedef node* link;
+				std::vector <link> adj;
+
+			public:
+				WSparseImpl(int V, bool digraph = false)
+					:adj(V), Vcnt(V), Ecnt(0), digraph(digraph)
+				{ 
+				}
+
+				int V() const
+				{
+					return Vcnt;
+				}
+
+				int E() const
+				{
+					return Ecnt;
+				}
+
+				bool directed() const
+				{
+					return digraph;
+				}
+
+				void insert(WEdge *e)
+				{
+					adj[e->v()] = new node(e, adj[e->v()]);
+					if (!digraph)
+						adj[e->w()] = new node(e, adj[e->w()]);
+					Ecnt++;
+				}
+
+				class Iterator
+				{
+					const WSparseImpl<WEdge> &G;
+					int v;
+					link t;
+				public:
+					Iterator(const WSparseImpl<WEdge> &G, int v)
+						:G(G), v(v)
+					{
+						t = 0;
+					}
+
+					WEdge* begin()
+					{
+						t = G.adj[v];
+						return t ? t->e : 0;
+					}
+
+					WEdge* next()
+					{
+						if (t) t = t->next;
+						return t ? t->e : 0;
+					}
+
+					bool end()
+					{
+						return t == 0;
+					}
+				};
+
+				Iterator getIterator(int v) const
+				{
+					return Iterator(*this, v);
+				}
+			};
+
+			// get weighted graph
+			std::vector<WEdge> getPrimGraphEdges(int& v);
 		}
 
 		namespace nsChapter
