@@ -5,6 +5,7 @@
 #include "Common.h"
 #include <memory>
 #include <random>
+#include <iomanip>  
 
 namespace nsAlgorithmsOnGraphs
 {
@@ -1367,17 +1368,60 @@ namespace nsAlgorithmsOnGraphs
 			class WEdge
 			{
 			public:
-				WEdge(int, int, double);
-				int v() const;
-				int w() const;
-				double wt() const;
-				bool from(int) const
+				WEdge(int v = -1, int w = -1, double weight = 0.0)
+					:v(v), w(w), wt(weight)
 				{
-					return true;
 				}
 
-				int other(int) const;
+				WEdge(const WEdge& other)
+				{
+					v = other.V();
+					w = other.W();
+					wt = other.WT();
+				}
+
+				int V() const
+				{
+					return v;
+				}
+
+				int W() const
+				{
+					return w;
+				}
+
+				double WT() const
+				{
+					return wt;
+				}
+
+				bool from(int V) const
+				{
+					return V == v;
+				}
+
+				int other(int V) const
+				{
+					if (V == v)
+						return w;
+					else
+						return v;
+				}
+
+			private:
+				int v;
+				int w;
+				double wt;
 			};
+
+			template <typename Graph>
+			void addWEdges(Graph& G, std::vector<WEdge> edges)
+			{
+				for (auto& element : edges)
+				{
+					G.insert(new WEdge(element));
+				}
+			}
 
 			template <typename WImpl, typename WEdge>
 			class WGraph
@@ -1408,29 +1452,20 @@ namespace nsAlgorithmsOnGraphs
 					return m_Pimpl->directed();
 				}
 
-				int insert(Edge *)
+				void insert(WEdge* e)
 				{
 					m_Pimpl->insert(e);
 				}
 
-				int remove(Edge *)
+				void remove(WEdge* e)
 				{
 					m_Pimpl->remove(e);
 				}
 
-				Edge *edge(int v, int w)
+				WEdge *edge(int v, int w)
 				{
 					return m_Pimpl->edge(v, w);
 				}
-
-				class adjIterator
-				{
-				public:
-					adjIterator(const WGraph &, int);
-					Edge *begin();
-					Edge *next();
-					bool end();
-				};
 
 				typename WImpl::Iterator getIterator(int v) const
 				{
@@ -1490,7 +1525,7 @@ namespace nsAlgorithmsOnGraphs
 
 				void insert(WEdge *e)
 				{
-					int v = e->v(), w = e->w();
+					int v = e->V(), w = e->W();
 					if (adj[v][w] == 0)
 						Ecnt++;
 					adj[v][w] = e;
@@ -1501,7 +1536,7 @@ namespace nsAlgorithmsOnGraphs
 
 				void remove(WEdge *e)
 				{
-					int v = e->v(), w = e->w();
+					int v = e->V(), w = e->W();
 					if (adj[v][w] != 0)
 						Ecnt--;
 					adj[v][w] = 0;
@@ -1594,9 +1629,9 @@ namespace nsAlgorithmsOnGraphs
 
 				void insert(WEdge *e)
 				{
-					adj[e->v()] = new node(e, adj[e->v()]);
+					adj[e->V()] = new node(e, adj[e->V()]);
 					if (!digraph)
-						adj[e->w()] = new node(e, adj[e->w()]);
+						adj[e->W()] = new node(e, adj[e->W()]);
 					Ecnt++;
 				}
 
@@ -1638,6 +1673,89 @@ namespace nsAlgorithmsOnGraphs
 
 			// get weighted graph
 			std::vector<WEdge> getPrimGraphEdges(int& v);
+
+			// Show WGraph
+			template <typename WGraph>
+			void wShow(WGraph& G)
+			{
+				std::cout << "Adjacency list :" << std::endl;
+				for (int v = 0; v < G.V(); v++)
+				{
+					std::cout.width(2);
+					std::cout << v << ":";
+					auto A = G.getIterator(v);
+					for (WEdge* t = A.begin(); !A.end(); t = A.next())
+					{
+						std::cout.width(2);
+						std::cout << t->W() << " ";
+					}
+					std::cout << endl;
+				}
+			}
+
+			template <typename WGraph>
+			void wShowEdges(WGraph& G)
+			{
+				std::cout << "Edges :" << std::endl;
+				auto edges = wEdges<WGraph, WEdge>(G);
+				for (auto& element : edges)
+					std::cout << element->V() << " - " << element->W() << "\n";
+			}
+
+			struct WMatrix
+			{
+				int connected;
+				double weight;
+			};
+
+			template <typename WGraph>
+			void wShowAdjacencyMatrix(WGraph& G)
+			{
+				std::cout << "Adjacency matrix :" << std::endl;
+
+				auto edges = wEdges<WGraph, WEdge>(G);
+				auto V = G.V();
+				bool directed = G.directed();
+
+				WMatrix** matrix = new WMatrix*[V];
+				for (int i = 0; i < V; ++i)
+					matrix[i] = new WMatrix[V];
+
+				for (int i = 0; i < V; i++)
+				for (int j = 0; j < V; j++)
+					matrix[i][j] = { 0, 0.0 };
+
+				for (auto& element : edges)
+				{
+					matrix[element->V()][element->W()].connected = 1;
+					matrix[element->V()][element->W()].weight = element->WT();
+
+					if (!directed)
+					{
+						matrix[element->W()][element->V()].connected = 1;
+						matrix[element->W()][element->V()].weight = element->WT();
+					}
+				}
+
+				for (int i = 0; i < V; i++)
+				{
+					for (int j = 0; j < V; j++)
+						std::cout << matrix[i][j].connected << "(" << matrix[i][j].weight << ") ";
+					std::cout << "\n";
+				}
+
+				for (int i = 0; i < V; ++i)
+					delete[] matrix[i];
+				delete[] matrix;
+			}
+
+			template <typename Graph>
+			void wShowAll(Graph& G)
+			{
+				wShowAdjacencyMatrix(G);
+				wShow(G);
+				wShowEdges(G);
+			}
 		}
 
 		namespace nsChapter

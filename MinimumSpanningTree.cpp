@@ -15,13 +15,25 @@ namespace nsAlgorithmsOnGraphs
 		void test()
 		{
 			using namespace nsGraphPropertiesTypes::nsGraph;
-			WGraph<WDenseImpl<WEdge>,WEdge> wG(10);
-			auto A = wG.getIterator(5);
-			auto edges = wEdges<WGraph<WDenseImpl<WEdge>, WEdge>, WEdge>(wG);
 
-			WGraph<WSparseImpl<WEdge>, WEdge> wG1(10);
-			auto A1 = wG1.getIterator(5);
-			auto edges1 = wEdges<WGraph<WSparseImpl<WEdge>, WEdge>, WEdge>(wG1);
+			int v = 0;
+			auto edges = getPrimGraphEdges(v);
+
+			WGraph<WDenseImpl<WEdge>,WEdge> wG(v);
+			addWEdges(wG, edges);
+			wShowAll(wG);
+
+			// auto A = wG.getIterator(5);
+			// auto edges = wEdges<WGraph<WDenseImpl<WEdge>, WEdge>, WEdge>(wG);
+
+
+
+			WGraph<WSparseImpl<WEdge>, WEdge> wG1(v);
+			addWEdges(wG1, edges);
+			wShowAll(wG1);
+
+			// auto A1 = wG1.getIterator(5);
+			// auto edges1 = wEdges<WGraph<WSparseImpl<WEdge>, WEdge>, WEdge>(wG1);
 		}
 	}
 }
