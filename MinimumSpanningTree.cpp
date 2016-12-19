@@ -24,8 +24,7 @@ namespace nsAlgorithmsOnGraphs
 			wShowAll(wG);
 
 			// auto A = wG.getIterator(5);
-			// auto edges = wEdges<WGraph<WDenseImpl<WEdge>, WEdge>, WEdge>(wG);
-
+			// auto edges = getWEdges<WGraph<WDenseImpl<WEdge>, WEdge>, WEdge>(wG);
 
 
 			WGraph<WSparseImpl<WEdge>, WEdge> wG1(v);
@@ -33,7 +32,10 @@ namespace nsAlgorithmsOnGraphs
 			wShowAll(wG1);
 
 			// auto A1 = wG1.getIterator(5);
-			// auto edges1 = wEdges<WGraph<WSparseImpl<WEdge>, WEdge>, WEdge>(wG1);
+			// auto edges1 = getWEdges<WGraph<WSparseImpl<WEdge>, WEdge>, WEdge>(wG1);
+
+			PMST<WGraph<WDenseImpl<WEdge>, WEdge>, WEdge> mst(wG);
+			mst.show();
 		}
 	}
 }

@@ -5,7 +5,8 @@
 #include "Common.h"
 #include <memory>
 #include <random>
-#include <iomanip>  
+#include <iomanip> 
+#include "UnionFind.h"
 
 namespace nsAlgorithmsOnGraphs
 {
@@ -1408,6 +1409,11 @@ namespace nsAlgorithmsOnGraphs
 						return v;
 				}
 
+				void show()
+				{
+					std::cout << v << " - " << w << "(" << wt << ")\n";
+				}
+
 			private:
 				int v;
 				int w;
@@ -1462,7 +1468,7 @@ namespace nsAlgorithmsOnGraphs
 					m_Pimpl->remove(e);
 				}
 
-				WEdge *edge(int v, int w)
+				WEdge *edge(int v, int w) const
 				{
 					return m_Pimpl->edge(v, w);
 				}
@@ -1478,7 +1484,7 @@ namespace nsAlgorithmsOnGraphs
 
 			// Программа 20.2. Пример клиентской функции обработки графа 
 			template <class WGraph, class WEdge>
-			std::vector <WEdge *> wEdges(const WGraph &G)
+			std::vector <WEdge *> getWEdges(const WGraph &G)
 			{
 				int E = 0;
 				std::vector <WEdge*> a(G.E());
@@ -1671,6 +1677,113 @@ namespace nsAlgorithmsOnGraphs
 				}
 			};
 
+			// Программа 20.6. Алгоритм Прима, реализующий построение дерева MST
+			template <class Graph, class Edge> class PMST
+			{
+				const Graph& G;
+				std::vector<double> wt;
+				std::vector<Edge*> fr, mst;
+
+			public:
+				PMST(const Graph &G)
+					:G(G), mst(G.V()), wt(G.V(), G.V()), fr(G.V())
+				{
+					int min = -1;
+					for (int v = 0; min != 0; v = min)
+					{
+						min = 0;
+						for (int w = 1; w < G.V(); w++)
+						if (mst[w] == 0)
+						{
+							double P;
+							Edge* e = G.edge(v, w);
+							if ( e)
+								if ((P = e->WT()) < wt[w])
+								{
+									wt[w] = P;
+									fr[w] = e;
+								}
+							if (wt[w] < wt[min])
+								min = w;
+						}
+						if (min)
+							mst[min] = fr[min];
+					}
+				}
+
+				void show()
+				{
+					std::cout << "MST show:\n";
+					for (int v = 1; v < G.V(); v++)
+					if (mst[v])
+						mst[v]->show();
+				}
+			};
+
+			// Программа 20.8.Алгоритм Крускала, обеспечивающий построение дерева MST
+			template <class Graph, class Edge, class EdgePtr>
+			class KMST
+			{
+				const Graph &G;
+				std::vector<EdgePtr> a, mst;
+				nsDataStructures::nsAbstractDataTypes::UnionFind uf;
+			public:
+				KMST(Graph &G)
+					: G(G), uf(G.V()), mst(G.V())
+				{
+					int V = G.V(), E = G.E();
+					a = edges<Graph, Edge, EdgePtr>(G);
+					sort<EdgePtr>(a, 0, E - 1);
+					for (int i = 0, k = 1; i < E && к < V; i++)
+					if (!uf.find(a[i]->v, a[i]->w))
+					{
+						uf.unite(a[i]->v, a[i]->w);
+						mst[k++] = a[i];
+					}
+				}
+			};
+
+			// Программа 20.9.Алгоритм Борувки построения дерева MST
+			template <class Graph, class Edge>
+			class BMST
+			{
+				const Graph &G;
+				std::vector<Edge*> a, b, mst;
+				nsDataStructures::nsAbstractDataTypes::UnionFind uf;
+
+			public:
+				BMST(const Graph &G)
+					: G(G), uf(G.V()), mst(G.V() + 1)
+				{
+					a = edges<Graph, Edge>(G);
+					int N, k = i;
+					for (int E = a.size(); E != 0; E = N)
+					{
+						int h, i, j;
+						b.assign(G.V(), 0);
+						for (h = 0, N = 0; h < E; h++)
+						{
+							Edge *e = a[h];
+							i = uf.find(e->V()), j = uf.find(e->W());
+							if (i == j)
+								continue;
+							if (!b[i] || e->wt() < b[i]->wt())
+								b[i] = e;
+							if (!b[j] || e->wt() < b[j]->wt())
+								b[j] = e;
+							a[N++] = e;
+						}
+						for (h = 0; h < G.V(); h++)
+						if (b[h])
+						if (!uf.find(i = b[h]->V(), j = b[h]->W()))
+						{
+							uf.unit(i, j);
+							mst[k++] = b[h];
+						}
+					}
+				}
+			};
+
 			// get weighted graph
 			std::vector<WEdge> getPrimGraphEdges(int& v);
 
@@ -1687,7 +1800,7 @@ namespace nsAlgorithmsOnGraphs
 					for (WEdge* t = A.begin(); !A.end(); t = A.next())
 					{
 						std::cout.width(2);
-						std::cout << t->W() << " ";
+						std::cout << (t->W() == v ? t->V() : t->W()) << "(" << t->WT() << ") ";
 					}
 					std::cout << endl;
 				}
@@ -1697,9 +1810,9 @@ namespace nsAlgorithmsOnGraphs
 			void wShowEdges(WGraph& G)
 			{
 				std::cout << "Edges :" << std::endl;
-				auto edges = wEdges<WGraph, WEdge>(G);
+				auto edges = getWEdges<WGraph, WEdge>(G);
 				for (auto& element : edges)
-					std::cout << element->V() << " - " << element->W() << "\n";
+					std::cout << element->V() << " - " << element->W() << "(" << element->WT() << ")\n";
 			}
 
 			struct WMatrix
@@ -1713,7 +1826,7 @@ namespace nsAlgorithmsOnGraphs
 			{
 				std::cout << "Adjacency matrix :" << std::endl;
 
-				auto edges = wEdges<WGraph, WEdge>(G);
+				auto edges = getWEdges<WGraph, WEdge>(G);
 				auto V = G.V();
 				bool directed = G.directed();
 
